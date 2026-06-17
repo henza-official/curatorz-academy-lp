@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Curatorz Academy | Education × AI Business OS</title>
+<!-- ============================================================
+  タグ設定ガイド
+  各 YOUR_XXXX の部分を実際のIDに書き換えてください
+  ============================================================
+
+  【1】Google タグマネージャー (GTM)
+       GTM_CONTAINER_ID → 例: GTM-XXXXXXX
+       GTMを使う場合、GA4・Google広告タグはGTM側で管理するため
+       下記の【2】【4】のタグはHTMLからは削除してOKです。
+
+  【2】Google アナリティクス (GA4)
+       GA4_MEASUREMENT_ID → 例: G-XXXXXXXXXX
+       ※GTMで管理する場合は不要
+
+  【3】Meta 広告ピクセル
+       META_PIXEL_ID → 例: 1234567890123
+
+  【4】Google 広告コンバージョン
+       GOOGLE_ADS_ID         → 例: AW-123456789
+       GOOGLE_ADS_CONV_LABEL → 例: AbCdEfGhIjKlMnOp
+       ※GTMで管理する場合は不要
+============================================================ -->
+
+<!-- ① Google タグマネージャー (head) ======================== -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM_CONTAINER_ID');</script>
+<!-- ① End GTM (head) ======================================= -->
+
+<!-- ② Google アナリティクス GA4 (GTM未使用時のみ) =========== -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GA4_MEASUREMENT_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GA4_MEASUREMENT_ID');
+</script>
+<!-- ② End GA4 ============================================== -->
+
+<!-- ④ Google 広告コンバージョン (GTM未使用時のみ) ============ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=GOOGLE_ADS_ID"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'GOOGLE_ADS_ID');
+</script>
+<!-- ④ End Google Ads ======================================= -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#1A2B3D;
+    --navy-soft:#2C4258;
+    --amber:#C9874A;
+    --gold:#E8C896;
+    --cream:#F7F4ED;
+    --gray:#6B7280;
+    --line:#E2DCCB;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans JP',sans-serif;
+    color:var(--navy);
+    background:var(--cream);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Noto Serif JP',serif;}
+  img,svg{display:block;}
+  a{color:inherit;}
+  .wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* ===== Header ===== */
+  header{
+    position:sticky;top:0;z-index:50;
+    background:rgba(247,244,237,0.9);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .header-inner{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:18px 24px;max-width:1080px;margin:0 auto;
+  }
+  .logo{font-family:'Noto Serif JP',serif;font-weight:900;font-size:1.3rem;letter-spacing:0.05em;}
+  .logo span{color:var(--amber);}
+  .header-cta{
+    background:var(--navy);color:#fff;
+    padding:10px 22px;border-radius:2px;
+    font-size:0.85rem;font-weight:500;
+    text-decoration:none;
+    transition:background 0.25s;
+  }
+  .header-cta:hover{background:var(--amber);}
+
+  /* Hamburger menu */
+  .menu-btn{
+    background:none;border:none;cursor:pointer;
+    display:flex;flex-direction:column;gap:5px;
+    padding:8px;margin-right:4px;
+  }
+  .menu-btn span{
+    display:block;width:24px;height:2px;background:var(--navy);
+    transition:all 0.3s;
+  }
+  .menu-btn.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+  .menu-btn.open span:nth-child(2){opacity:0;}
+  .menu-btn.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+  .header-right{display:flex;align-items:center;gap:4px;}
+
+  .nav-panel{
+    position:fixed;top:0;right:0;height:100%;width:min(320px,85vw);
+    background:var(--navy);color:#fff;
+    transform:translateX(100%);
+    transition:transform 0.35s ease;
+    z-index:100;
+    padding:90px 32px 32px;
+    box-shadow:-10px 0 30px rgba(0,0,0,0.2);
+  }
+  .nav-panel.open{transform:translateX(0);}
+  .nav-overlay{
+    position:fixed;inset:0;background:rgba(0,0,0,0.4);
+    opacity:0;pointer-events:none;transition:opacity 0.35s;z-index:99;
+  }
+  .nav-overlay.open{opacity:1;pointer-events:auto;}
+  .nav-panel .nav-eyebrow{
+    font-size:0.72rem;letter-spacing:0.2em;color:var(--gold);
+    margin-bottom:18px;font-weight:700;
+  }
+  .nav-panel ul{list-style:none;}
+  .nav-panel li{border-bottom:1px solid rgba(255,255,255,0.1);}
+  .nav-panel a{
+    display:block;padding:16px 4px;text-decoration:none;color:#fff;
+    font-family:'Noto Serif JP',serif;font-weight:700;font-size:0.98rem;
+    transition:color 0.2s;
+  }
+  .nav-panel a:hover{color:var(--gold);}
+  .nav-panel a.current{color:var(--gold);}
+  .nav-panel a .en{
+    display:block;font-family:'Noto Sans JP',sans-serif;font-weight:400;
+    font-size:0.7rem;letter-spacing:0.15em;color:#9AA7B4;margin-top:2px;
+  }
+  .nav-company{
+    margin-top:36px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.15);
+    font-size:0.78rem;color:#9AA7B4;line-height:1.9;
+  }
+  .nav-company .nc-name{
+    font-family:'Noto Serif JP',serif;color:#fff;font-weight:700;
+    font-size:0.92rem;margin-bottom:6px;
+  }
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    padding:90px 0 100px;
+    overflow:hidden;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr 1.3fr;gap:48px;align-items:center;
+  }
+  .hero-noise{
+    position:relative;height:340px;
+    display:flex;flex-direction:column;justify-content:center;gap:14px;
+    opacity:0.55;
+  }
+  .hero-noise span{
+    font-family:'Noto Serif JP',serif;
+    font-weight:700;
+    color:var(--gray);
+    line-height:1.3;
+    filter:blur(0.3px);
+  }
+  .hero-noise span:nth-child(1){font-size:1.1rem;margin-left:0;}
+  .hero-noise span:nth-child(2){font-size:1.6rem;margin-left:30px;opacity:0.7;}
+  .hero-noise span:nth-child(3){font-size:0.95rem;margin-left:8px;}
+  .hero-noise span:nth-child(4){font-size:1.3rem;margin-left:40px;opacity:0.5;}
+  .hero-noise span:nth-child(5){font-size:1rem;margin-left:4px;}
+  .hero-noise::after{
+    content:'';
+    position:absolute;inset:-20px;
+    background:linear-gradient(to right, var(--cream) 0%, rgba(247,244,237,0) 35%, rgba(247,244,237,0) 100%);
+    pointer-events:none;
+  }
+
+  /* Hero video */
+  .hero-video-wrap{
+    position:relative;
+    border-radius:4px;
+    overflow:hidden;
+    aspect-ratio:4/3;
+    background:var(--navy);
+    border:1px solid var(--line);
+  }
+  .hero-video-wrap video{
+    width:100%;height:100%;
+    object-fit:cover;display:block;
+  }
+  .hero-video-fallback{
+    position:absolute;inset:0;
+    display:flex;align-items:center;justify-content:center;
+    background:var(--navy);
+  }
+  .hero-video-fallback-text{
+    color:#9AA7B4;font-size:0.85rem;text-align:center;padding:0 20px;
+  }
+  .hero-video-badge{
+    position:absolute;bottom:14px;left:14px;
+    background:rgba(26,43,61,0.85);
+    color:#fff;font-size:0.72rem;letter-spacing:0.05em;
+    padding:6px 12px;border-radius:2px;
+    backdrop-filter:blur(4px);
+  }
+  @media (max-width:860px){
+    .hero-video-wrap{aspect-ratio:16/10;margin-bottom:8px;}
+  }
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:0.78rem;letter-spacing:0.18em;
+    color:var(--amber);font-weight:700;
+    margin-bottom:22px;
+  }
+  .eyebrow::before{content:'';width:28px;height:1px;background:var(--amber);}
+  .hero h1{
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    font-weight:900;line-height:1.45;letter-spacing:0.02em;
+    margin-bottom:24px;
+  }
+  .hero h1 em{
+    font-style:normal;color:var(--amber);
+    background:linear-gradient(to top, var(--gold) 28%, transparent 28%);
+    padding:0 2px;
+  }
+  .hero p.sub{
+    font-size:1.05rem;color:var(--navy-soft);
+    max-width:520px;margin-bottom:36px;
+  }
+  .hero-ctas{display:flex;flex-wrap:wrap;gap:14px;}
+  .btn-primary{
+    background:var(--navy);color:#fff;
+    padding:16px 30px;border-radius:2px;
+    font-weight:700;font-size:0.95rem;
+    text-decoration:none;
+    border:1px solid var(--navy);
+    transition:all 0.25s;
+    display:inline-flex;align-items:center;gap:10px;
+  }
+  .btn-primary:hover{background:var(--amber);border-color:var(--amber);}
+  .btn-secondary{
+    background:transparent;color:var(--navy);
+    padding:16px 30px;border-radius:2px;
+    font-weight:700;font-size:0.95rem;
+    text-decoration:none;
+    border:1px solid var(--navy);
+    transition:all 0.25s;
+  }
+  .btn-secondary:hover{background:var(--navy);color:#fff;}
+
+  /* ===== Section shared ===== */
+  section{padding:88px 0;}
+  .section-title{
+    font-size:clamp(1.6rem,3.6vw,2.3rem);
+    font-weight:900;text-align:center;
+    margin-bottom:14px;
+  }
+  .section-lead{
+    text-align:center;color:var(--gray);
+    max-width:560px;margin:0 auto 56px;font-size:0.98rem;
+  }
+  .tag{
+    display:block;text-align:center;
+    font-size:0.78rem;letter-spacing:0.22em;color:var(--amber);
+    font-weight:700;margin-bottom:14px;
+  }
+
+  /* ===== Pain points ===== */
+  .pain{background:var(--navy);color:#F7F4ED;}
+  .pain .section-title,.pain .tag{color:#fff;}
+  .pain .tag{color:var(--gold);}
+  .pain .section-lead{color:#C7CFD8;}
+  .pain-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1px;background:rgba(255,255,255,0.12);
+    border:1px solid rgba(255,255,255,0.12);
+  }
+  .pain-item{
+    background:var(--navy);padding:32px 26px;
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .pain-item .num{
+    font-family:'Noto Serif JP',serif;font-size:1.6rem;font-weight:700;
+    color:var(--amber);
+  }
+  .pain-item p{font-size:0.95rem;color:#E5E9ED;}
+
+  /* ===== Solution ===== */
+  .solution-inner{
+    display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;
+  }
+  .solution h2{font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.6;margin-bottom:22px;font-weight:900;}
+  .solution h2 em{font-style:normal;color:var(--amber);}
+  .solution p{color:var(--navy-soft);margin-bottom:16px;font-size:0.98rem;}
+  .pillar-card{
+    border:1px solid var(--line);background:#fff;
+    padding:30px;border-radius:2px;
+    box-shadow:0 1px 0 var(--line);
+  }
+  .pillar-card .pillar-title{
+    font-family:'Noto Serif JP',serif;font-weight:700;
+    font-size:1.1rem;margin-bottom:6px;color:var(--navy);
+  }
+  .pillar-row{display:flex;flex-direction:column;gap:18px;}
+  .pillar-row .pillar-card{display:flex;gap:18px;align-items:flex-start;}
+  .pillar-card .icon{
+    flex:none;width:42px;height:42px;border-radius:50%;
+    background:var(--cream);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Noto Serif JP',serif;font-weight:700;color:var(--amber);
+  }
+  .pillar-card .pillar-text p{margin:0;color:var(--gray);font-size:0.92rem;}
+
+  /* ===== Strengths (signature step visual) ===== */
+  .strengths{background:#fff;}
+  .steps{
+    display:flex;flex-direction:column;gap:0;
+    border:1px solid var(--line);
+    border-radius:2px;overflow:hidden;
+  }
+  .step{
+    display:grid;grid-template-columns:120px 1fr;
+    border-bottom:1px solid var(--line);
+    position:relative;
+  }
+  .step:last-child{border-bottom:none;}
+  .step-label{
+    background:var(--navy);color:#fff;
+    display:flex;flex-direction:column;justify-content:center;align-items:flex-start;
+    padding:28px 24px;
+    font-family:'Noto Serif JP',serif;font-weight:700;
+  }
+  .step-label .sl-en{font-size:0.7rem;letter-spacing:0.2em;color:var(--gold);margin-bottom:6px;}
+  .step-label .sl-num{font-size:1.5rem;}
+  .step-body{
+    padding:28px 28px;
+    display:grid;grid-template-columns:repeat(2,1fr);gap:24px;
+  }
+  .step-body .reason{
+    display:flex;flex-direction:column;gap:6px;
+  }
+  .step-body .reason h3{
+    font-size:1.02rem;font-weight:700;font-family:'Noto Serif JP',serif;
+    display:flex;align-items:center;gap:8px;
+  }
+  .step-body .reason h3::before{
+    content:'';width:6px;height:6px;background:var(--amber);
+    transform:rotate(45deg);flex:none;
+  }
+  .step-body .reason p{font-size:0.9rem;color:var(--gray);margin:0;}
+  .step-body.single{grid-template-columns:1fr;}
+
+  @media (max-width:760px){
+    .step{grid-template-columns:1fr;}
+    .step-label{padding:18px 24px;flex-direction:row;align-items:center;gap:12px;}
+    .step-label .sl-en{margin-bottom:0;}
+    .step-body{grid-template-columns:1fr;}
+  }
+
+  /* ===== Case studies ===== */
+  .cases{background:var(--cream);}
+  .case-grid{
+    display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:28px;
+  }
+  .case-card{
+    background:#fff;border:1px solid var(--line);
+    padding:32px;border-radius:2px;
+    display:flex;flex-direction:column;gap:16px;
+  }
+  .case-meta{
+    display:flex;justify-content:space-between;align-items:baseline;
+    border-bottom:1px solid var(--line);padding-bottom:14px;
+  }
+  .case-meta .industry{font-size:0.78rem;letter-spacing:0.1em;color:var(--amber);font-weight:700;}
+  .case-meta .scale{font-size:0.78rem;color:var(--gray);}
+  .case-result{
+    font-family:'Noto Serif JP',serif;font-weight:900;
+    font-size:1.4rem;color:var(--navy);
+  }
+  .case-result span{color:var(--amber);}
+  .case-card p.body{font-size:0.92rem;color:var(--navy-soft);}
+  .case-card .voice{
+    font-size:0.82rem;color:var(--gray);text-align:right;
+    border-top:1px solid var(--line);padding-top:12px;
+  }
+
+  /* ===== FAQ ===== */
+  .faq{background:#fff;}
+  .faq-list{max-width:760px;margin:0 auto;}
+  details{
+    border-bottom:1px solid var(--line);
+    padding:22px 0;
+  }
+  details summary{
+    list-style:none;cursor:pointer;
+    display:flex;justify-content:space-between;align-items:center;gap:16px;
+    font-weight:700;font-family:'Noto Serif JP',serif;font-size:1.02rem;
+  }
+  details summary::-webkit-details-marker{display:none;}
+  details summary::after{
+    content:'+';font-size:1.4rem;color:var(--amber);
+    font-family:'Noto Sans JP',sans-serif;font-weight:400;flex:none;
+    transition:transform 0.25s;
+  }
+  details[open] summary::after{content:'−';}
+  details p{
+    color:var(--gray);font-size:0.92rem;
+    margin-top:14px;padding-right:36px;
+  }
+
+  /* ===== Final CTA / Footer ===== */
+  .final-cta{
+    background:var(--navy);color:#fff;text-align:center;
+    position:relative;overflow:hidden;
+  }
+  .final-cta::before{
+    content:'';position:absolute;inset:0;
+    background:radial-gradient(ellipse at 50% 0%, rgba(232,200,150,0.18), transparent 60%);
+  }
+  .final-cta-inner{position:relative;z-index:1;}
+  .final-cta h2{
+    font-size:clamp(1.6rem,4.2vw,2.4rem);font-weight:900;
+    margin-bottom:18px;line-height:1.5;
+  }
+  .final-cta h2 em{font-style:normal;color:var(--gold);}
+  .final-cta p{color:#C7CFD8;max-width:520px;margin:0 auto 36px;}
+  .final-ctas{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-bottom:28px;}
+  .final-cta .btn-primary{background:var(--amber);border-color:var(--amber);color:var(--navy);}
+  .final-cta .btn-primary:hover{background:var(--gold);border-color:var(--gold);}
+  .final-cta .btn-secondary{border-color:rgba(255,255,255,0.4);color:#fff;}
+  .final-cta .btn-secondary:hover{background:#fff;color:var(--navy);}
+  .final-note{font-size:0.82rem;color:#9AA7B4;}
+
+  footer{
+    background:var(--navy);color:#9AA7B4;
+    padding:48px 0 24px;
+    font-size:0.85rem;
+    border-top:1px solid rgba(255,255,255,0.08);
+  }
+  .footer-grid{
+    display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:36px;
+    padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,0.1);
+  }
+  .footer-col .fc-title{
+    font-family:'Noto Serif JP',serif;color:#fff;font-weight:700;
+    font-size:0.95rem;margin-bottom:14px;
+  }
+  .footer-col p{margin:0 0 6px;line-height:1.8;}
+  .footer-col ul{list-style:none;}
+  .footer-col li{margin-bottom:8px;}
+  .footer-col a{text-decoration:none;color:#9AA7B4;transition:color 0.2s;}
+  .footer-col a:hover{color:var(--gold);}
+  .footer-bottom{
+    padding-top:20px;text-align:center;font-size:0.78rem;
+  }
+  .footer-bottom .operator{color:#D6DCE2;margin-bottom:6px;}
+  @media (max-width:760px){
+    .footer-grid{grid-template-columns:1fr;gap:28px;}
+  }
+
+  /* ===== Reference photo section ===== */
+  .gallery{background:var(--cream);}
+  .gallery-grid{
+    display:grid;grid-template-columns:1.3fr 1fr;gap:20px;
+  }
+  .gallery-grid .g-main{grid-row:span 2;}
+  .gallery img{
+    width:100%;height:100%;object-fit:cover;
+    border-radius:2px;border:1px solid var(--line);
+    display:block;
+  }
+  .gallery-grid .g-main img{height:100%;min-height:360px;}
+  .gallery-grid .g-sub img{height:170px;}
+  .gallery-caption{
+    text-align:center;color:var(--gray);font-size:0.85rem;
+    margin-top:18px;
+  }
+  @media (max-width:760px){
+    .gallery-grid{grid-template-columns:1fr;}
+    .gallery-grid .g-main{grid-row:auto;}
+    .gallery-grid .g-main img{min-height:240px;}
+  }
+
+  /* ===== Diagnosis ===== */
+  .diagnosis{background:var(--navy-soft);color:#fff;}
+  .diagnosis .tag{color:var(--gold);}
+  .diagnosis .section-title{color:#fff;}
+  .diagnosis .section-lead{color:#D6DCE2;}
+  .diag-panel{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.15);
+    border-radius:2px;
+    padding:8px;
+    max-width:760px;margin:0 auto;
+  }
+  .diag-group{padding:24px 20px;}
+  .diag-group + .diag-group{border-top:1px solid rgba(255,255,255,0.1);}
+  .diag-group-title{
+    font-family:'Noto Serif JP',serif;font-weight:700;
+    font-size:0.95rem;color:var(--gold);
+    margin-bottom:14px;
+    display:flex;align-items:center;gap:10px;
+  }
+  .diag-group-title .badge{
+    font-size:0.68rem;letter-spacing:0.1em;
+    border:1px solid var(--gold);color:var(--gold);
+    padding:2px 8px;border-radius:999px;font-family:'Noto Sans JP',sans-serif;font-weight:700;
+  }
+  .diag-item{
+    display:flex;align-items:flex-start;gap:12px;
+    padding:10px 6px;
+    cursor:pointer;
+    border-radius:2px;
+    transition:background 0.2s;
+  }
+  .diag-item:hover{background:rgba(255,255,255,0.04);}
+  .diag-item input{
+    margin-top:4px;width:18px;height:18px;flex:none;
+    accent-color:var(--amber);cursor:pointer;
+  }
+  .diag-item label{font-size:0.92rem;color:#E8ECEF;cursor:pointer;line-height:1.6;}
+  .diag-item label .q-tag{color:var(--gold);font-weight:700;margin-right:6px;}
+
+  .diag-result{
+    margin-top:32px;max-width:760px;margin-left:auto;margin-right:auto;
+    background:#fff;color:var(--navy);
+    border-radius:2px;padding:32px;
+    text-align:center;
+  }
+  .diag-result .score-num{
+    font-family:'Noto Serif JP',serif;font-weight:900;
+    font-size:2.6rem;color:var(--amber);
+  }
+  .diag-result .score-label{
+    font-size:0.85rem;color:var(--gray);letter-spacing:0.1em;
+    margin-bottom:6px;
+  }
+  .diag-result .score-msg{
+    margin-top:14px;font-size:1.05rem;font-weight:700;
+    font-family:'Noto Serif JP',serif;
+  }
+  .diag-result .score-desc{
+    margin-top:10px;font-size:0.9rem;color:var(--gray);
+    max-width:480px;margin-left:auto;margin-right:auto;
+  }
+  .diag-result .score-cta{margin-top:22px;}
+  .diag-bar{
+    height:8px;border-radius:999px;background:var(--cream);
+    overflow:hidden;max-width:480px;margin:18px auto 0;
+    border:1px solid var(--line);
+  }
+  .diag-bar-fill{
+    height:100%;background:linear-gradient(to right,var(--amber),var(--gold));
+    width:0%;transition:width 0.6s ease;
+  }
+  .diag-counter{
+    text-align:center;margin-top:18px;
+    font-size:0.85rem;color:#D6DCE2;
+    letter-spacing:0.05em;
+  }
+  .diag-counter strong{color:var(--gold);font-size:1.1rem;font-family:'Noto Serif JP',serif;}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-noise{display:none;}
+    .solution-inner{grid-template-columns:1fr;}
+  }
+
+  /* ===== MOBILE OPTIMIZATION ===== */
+  @media (max-width:600px){
+    /* 全体 */
+    .wrap{padding:0 16px;}
+    section{padding:56px 0;}
+
+    /* ヘッダー */
+    .header-inner{padding:14px 16px;}
+    .logo{font-size:1.1rem;}
+    .header-cta{
+      font-size:0.78rem;padding:8px 14px;
+      white-space:nowrap;
+    }
+
+    /* ヒーロー */
+    .hero{padding:52px 0 60px;}
+    .eyebrow{font-size:0.7rem;margin-bottom:14px;}
+    .hero h1{
+      font-size:1.75rem;
+      line-height:1.55;
+      margin-bottom:18px;
+    }
+    .hero p.sub{font-size:0.93rem;margin-bottom:28px;}
+    .hero-ctas{flex-direction:column;gap:10px;}
+    .btn-primary,.btn-secondary{
+      width:100%;text-align:center;
+      justify-content:center;
+      padding:14px 20px;font-size:0.9rem;
+    }
+
+    /* セクション共通 */
+    .section-title{font-size:1.45rem;line-height:1.5;}
+    .section-lead{font-size:0.88rem;margin-bottom:36px;}
+    .tag{font-size:0.7rem;letter-spacing:0.14em;margin-bottom:10px;}
+
+    /* 悩みセクション */
+    .pain-grid{grid-template-columns:1fr;}
+    .pain-item{padding:22px 18px;gap:10px;}
+    .pain-item .num{font-size:1.3rem;}
+    .pain-item p{font-size:0.9rem;}
+
+    /* 解決策 */
+    .solution h2{font-size:1.5rem;}
+    .solution p{font-size:0.9rem;}
+    .pillar-card{padding:20px;}
+    .pillar-card .pillar-title{font-size:1rem;}
+
+    /* 強み・特徴 */
+    .step{grid-template-columns:1fr;}
+    .step-label{
+      padding:14px 18px;
+      flex-direction:row;align-items:center;gap:10px;
+    }
+    .step-label .sl-en{margin-bottom:0;font-size:0.65rem;}
+    .step-label .sl-num{font-size:1.1rem;}
+    .step-body{padding:18px;grid-template-columns:1fr;gap:18px;}
+    .step-body .reason h3{font-size:0.95rem;}
+    .step-body .reason p{font-size:0.86rem;}
+
+    /* 事例カード */
+    .case-grid{grid-template-columns:1fr;}
+    .case-card{padding:22px 18px;gap:12px;}
+    .case-result{font-size:1.2rem;}
+    .case-card p.body{font-size:0.88rem;}
+
+    /* 自己診断 */
+    .diag-panel{padding:4px;}
+    .diag-group{padding:18px 14px;}
+    .diag-group-title{
+      font-size:0.85rem;
+      flex-wrap:wrap;gap:8px;
+    }
+    .diag-item{padding:10px 4px;gap:10px;}
+    .diag-item input{width:20px;height:20px;margin-top:2px;}
+    .diag-item label{font-size:0.86rem;line-height:1.65;}
+    .diag-result{padding:22px 18px;}
+    .diag-result .score-num{font-size:2.1rem;}
+    .diag-result .score-msg{font-size:0.95rem;}
+    .diag-result .score-desc{font-size:0.85rem;}
+    .diag-result .score-cta .btn-secondary{
+      width:100%;text-align:center;font-size:0.85rem;padding:12px 16px;
+    }
+
+    /* FAQ */
+    details summary{font-size:0.93rem;}
+    details p{font-size:0.88rem;padding-right:12px;}
+
+    /* ギャラリー */
+    .gallery-grid{grid-template-columns:1fr;}
+    .gallery-grid .g-main{grid-row:auto;}
+    .gallery-grid .g-main img{min-height:200px;height:200px;}
+    .gallery-grid .g-sub img{height:160px;}
+    .gallery-caption{font-size:0.8rem;}
+
+    /* 最終CTA */
+    .final-cta h2{font-size:1.4rem;line-height:1.55;}
+    .final-cta p{font-size:0.88rem;margin-bottom:24px;}
+    .final-ctas{flex-direction:column;gap:10px;}
+    .final-ctas .btn-primary,
+    .final-ctas .btn-secondary{
+      width:100%;text-align:center;justify-content:center;
+      padding:14px 16px;font-size:0.9rem;
+    }
+    .final-note{font-size:0.78rem;}
+
+    /* フッター */
+    .footer-grid{grid-template-columns:1fr;gap:24px;}
+    footer{padding:36px 0 20px;}
+    .footer-col .fc-title{font-size:0.88rem;margin-bottom:10px;}
+    .footer-col p,.footer-col a{font-size:0.82rem;}
+    .footer-bottom{font-size:0.74rem;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ① Google タグマネージャー (body・noscript) ============== -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM_CONTAINER_ID"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- ① End GTM (body) ====================================== -->
+
+<!-- ③ Meta 広告ピクセル ==================================== -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', 'META_PIXEL_ID');
+fbq('track', 'PageView');
+</script>
+<noscript>
+  <img height="1" width="1" style="display:none"
+  src="https://www.facebook.com/tr?id=META_PIXEL_ID&ev=PageView&noscript=1"/>
+</noscript>
+<!-- ③ End Meta Pixel ====================================== -->
+
+<header>
+  <div class="header-inner">
+    <div class="logo">Curatorz<span>Academy</span></div>
+    <div class="header-right">
+      <a href="https://www.henza-official.com/company.php#contact" target="_blank" rel="noopener" class="header-cta">資料請求・お問い合わせ</a>
+      <button class="menu-btn" id="menuBtn" aria-label="メニュー">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="nav-panel" id="navPanel">
+  <div class="nav-eyebrow">HENZA GROUP SITES</div>
+  <ul>
+    <li><a href="https://www.henza-official.com/" target="_blank" rel="noopener">トップページ<span class="en">HENZA Inc.</span></a></li>
+    <li><a href="https://www.henza-official.com/company.php" target="_blank" rel="noopener">会社概要<span class="en">Company</span></a></li>
+    <li><a href="https://www.henza-official.com/openinnovation.php" target="_blank" rel="noopener">オープンイノベーション事業<span class="en">Open Innovation</span></a></li>
+    <li><a href="https://www.henza-official.com/curatorzacademy.php" target="_blank" rel="noopener" class="current">キュレーターズアカデミー事業<span class="en">Curatorz Academy</span></a></li>
+    <li><a href="https://www.henza-official.com/ai.php" target="_blank" rel="noopener">AI事業<span class="en">AI</span></a></li>
+    <li><a href="https://www.henza-official.com/brand.php#top_2" target="_blank" rel="noopener">GALLERY HENZA事業<span class="en">Gallery Henza</span></a></li>
+  </ul>
+  <div class="nav-company">
+    <div class="nc-name">株式会社HENZA</div>
+    〒900-0015<br>
+    沖縄県那覇市久茂地2丁目2-2<br>
+    タイムスビル2階<br><br>
+    ブランディングとデジタルマーケティングを通して<br>豊かな社会の創造に貢献する
+  </div>
+</nav>
+
+<script>
+(function(){
+  const btn = document.getElementById('menuBtn');
+  const panel = document.getElementById('navPanel');
+  const overlay = document.getElementById('navOverlay');
+  function toggle(){
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+    overlay.classList.toggle('open');
+  }
+  btn.addEventListener('click', toggle);
+  overlay.addEventListener('click', toggle);
+})();
+</script>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-video-wrap">
+      <video autoplay muted loop playsinline poster="hero-video-poster.jpg">
+        <source src="hero-video.mp4" type="video/mp4">
+      </video>
+      <div class="hero-video-fallback" style="display:none;">
+        <p class="hero-video-fallback-text">動画を読み込み中、または再生できません</p>
+      </div>
+      <div class="hero-video-badge">Curatorz Academy 導入イメージ</div>
+    </div>
+    <div>
+      <div class="eyebrow">EDUCATION × AI BUSINESS OS</div>
+      <h1>御社のAI活用、<br>「<em>興味はあるが進まない</em>」を<br>今日で終わらせる。</h1>
+      <p class="sub">
+        学ぶだけ、導入するだけではもう古い。Curatorz Academyは、教育プラットフォームと業務実装支援を一体化した法人向けサービスです。36〜500アカウントで、貴社全体のITリテラシーを底上げし、事業のスピードと質を変えます。
+      </p>
+      <div class="hero-ctas">
+        <a href="demo.html" class="btn-primary">無料デモアカウントを試す →</a>
+        <a href="download.html" class="btn-secondary">まずは資料で詳しく見る(無料)</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const video = document.querySelector('.hero-video-wrap video');
+  const fallback = document.querySelector('.hero-video-fallback');
+  if(video){
+    video.addEventListener('error', function(){
+      video.style.display = 'none';
+      if(fallback) fallback.style.display = 'flex';
+    });
+  }
+})();
+</script>
+
+<!-- ===== PAIN POINTS ===== -->
+<section class="pain">
+  <div class="wrap">
+    <span class="tag">よくあるお悩み</span>
+    <h2 class="section-title">こんなお悩み、ありませんか？</h2>
+    <p class="section-lead">沖縄県内の経営層の方々から、よく伺う声です。</p>
+    <div class="pain-grid">
+      <div class="pain-item">
+        <div class="num">01</div>
+        <p>AIやDXの重要性は理解しているが、何から始めればいいか分からない</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">02</div>
+        <p>ツールを導入しても、使いこなせる社員が一部に限られている</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">03</div>
+        <p>外部研修は高額で、全社員に展開するのは現実的でない</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">04</div>
+        <p>沖縄県内で、実績のある相談先が見つからない</p>
+      </div>
+      <div class="pain-item">
+        <div class="num">05</div>
+        <p>「導入して終わり」ではなく、成果につながる仕組みが欲しい</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SOLUTION ===== -->
+<section class="solution">
+  <div class="wrap solution-inner">
+    <div>
+      <span class="tag" style="text-align:left;">SOLUTION</span>
+      <h2>学ぶだけでも、<br>導入するだけでも、<br>もう<em>古い</em>。</h2>
+      <p>
+        Curatorz Academyは、「Education(教育)」と「AI Business OS(業務実装支援)」を統合した、法人向けの新しいAI活用支援サービスです。
+      </p>
+      <p>
+        社員一人ひとりがAIの基礎から実践までを動画とeラーニングで学べる教育プラットフォームと、実際の業務にAIを組み込むための実装支援を一体化。学んだ知識をその場で「使える形」に変えることで、組織全体のAI活用レベルを着実に引き上げます。
+      </p>
+      <p>
+        36〜500アカウントまで対応可能な月額プランで、部署単位から全社展開まで柔軟にスケールします。
+      </p>
+    </div>
+    <div class="pillar-row">
+      <div class="pillar-card">
+        <div class="icon">学</div>
+        <div class="pillar-text">
+          <div class="pillar-title">Education Platform</div>
+          <p>動画講座とeラーニングで、AIの基礎から実践までを学ぶ教育プラットフォーム。</p>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">×</div>
+        <div class="pillar-text">
+          <div class="pillar-title">統合(Integration)</div>
+          <p>学んだ知識を、その場で「使える形」へ。教育と実務をシームレスにつなぐ。</p>
+        </div>
+      </div>
+      <div class="pillar-card">
+        <div class="icon">実</div>
+        <div class="pillar-text">
+          <div class="pillar-title">AI Business OS</div>
+          <p>実際の業務プロセスにAIを組み込む、実装支援サービス。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STRENGTHS ===== -->
+<section class="strengths">
+  <div class="wrap">
+    <span class="tag">選ばれる理由</span>
+    <h2 class="section-title">Curatorz Academyが選ばれる理由</h2>
+    <p class="section-lead">料金設計・カリキュラムの質・学習の仕組みという、3つの軸で設計されています。</p>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-label">
+          <div class="sl-en">PRICING</div>
+          <div class="sl-num">料金設計</div>
+        </div>
+        <div class="step-body">
+          <div class="reason">
+            <h3>規模が大きいほど、お得に</h3>
+            <p>36〜500アカウントまで対応する月額制プラン。利用人数が増えるほど1アカウントあたりの単価が下がるため、部署単位の小規模導入から全社展開まで、コストを抑えながらスケールできます。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">
+          <div class="sl-en">CONTENT</div>
+          <div class="sl-num">カリキュラム</div>
+        </div>
+        <div class="step-body">
+          <div class="reason">
+            <h3>大手企業も採用する実践内容</h3>
+            <p>大手企業が手掛けるサービス・知見をベースとしたカリキュラムを採用。一般的なAIリテラシー研修とは一線を画す、実務で通用する内容を提供します。</p>
+          </div>
+          <div class="reason">
+            <h3>ゼロからでも、基礎から学べる</h3>
+            <p>AIの知識がない方でも、基礎から着実にステップアップできる構成。組織全体のITリテラシーの底上げを実現します。</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-label">
+          <div class="sl-en">METHOD</div>
+          <div class="sl-num">学習設計</div>
+        </div>
+        <div class="step-body">
+          <div class="reason">
+            <h3>動画でわかりやすく解説</h3>
+            <p>すべての講座を動画で解説。難しい専門用語も、視覚的に理解できる構成です。</p>
+          </div>
+          <div class="reason">
+            <h3>演習問題で「できる」に変える</h3>
+            <p>見るだけで終わらない、演習問題を通じた実践型学習。学んだ内容がそのまま、事業や社員の仕事のスピード・質の向上につながります。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CASE STUDIES ===== -->
+<section class="cases">
+  <div class="wrap">
+    <span class="tag">導入事例</span>
+    <h2 class="section-title">導入企業の声</h2>
+    <p class="section-lead">沖縄県内企業での導入事例をご紹介します。</p>
+    <div class="case-grid">
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="industry">製造業 A社</span>
+          <span class="scale">従業員80名</span>
+        </div>
+        <div class="case-result">一次対応時間 <span>約40%削減</span></div>
+        <p class="body">全社員にCuratorz Academyを導入し、まずAIの基礎をeラーニングで学習。その後、業務実装支援を活用して受発注管理業務にAIチャットボットを導入。社員のITへの抵抗感も大きく減りました。</p>
+        <p class="voice">― 経営企画部 部長</p>
+      </div>
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="industry">サービス業 B社</span>
+          <span class="scale">従業員45名</span>
+        </div>
+        <div class="case-result">資料作成時間 <span>平均30%短縮</span></div>
+        <p class="body">営業資料作成や議事録作成にAIを活用する研修を実施。短縮できた時間を顧客対応に充てられるようになり、商談数が増加しました。</p>
+        <p class="voice">― 代表取締役</p>
+      </div>
+      <div class="case-card">
+        <div class="case-meta">
+          <span class="industry">小売業 C社</span>
+          <span class="scale">従業員120名</span>
+        </div>
+        <div class="case-result">廃棄ロス <span>削減を実現</span></div>
+        <p class="body">全部署に展開し、それぞれの業務に合わせたAI活用方法を学習。在庫管理や需要予測の精度が向上。経営層・現場双方のITリテラシーが揃い、新施策の導入スピードが格段に上がりました。</p>
+        <p class="voice">― 取締役</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SELF DIAGNOSIS ===== -->
+<section class="diagnosis">
+  <div class="wrap">
+    <span class="tag">SELF CHECK</span>
+    <h2 class="section-title">あなたの会社の「AI組織対応度」をチェック</h2>
+    <p class="section-lead">
+      「AIで効率化して終わる会社」と「AIで成果が伸びる会社」を分けるのは、組織の5つの機能(5M)がAI前提で連動できているかどうか。15の質問に✓を入れて、現在地を確認してみましょう。
+    </p>
+
+    <div class="diag-panel">
+      <div class="diag-group">
+        <div class="diag-group-title">前半｜Define・Design ―方向づけと構造設計 <span class="badge">Q1-9</span></div>
+        <div class="diag-item"><input type="checkbox" id="q1"><label for="q1"><span class="q-tag">Q1</span>AIがリーチできない「データの蓄積」を自社で作れている</label></div>
+        <div class="diag-item"><input type="checkbox" id="q2"><label for="q2"><span class="q-tag">Q2</span>AIに選ばれる理由を「機能・価格以外」で一つ言える</label></div>
+        <div class="diag-item"><input type="checkbox" id="q3"><label for="q3"><span class="q-tag">Q3</span>「機能の値段以外で課金する形」を導入・検討している</label></div>
+        <div class="diag-item"><input type="checkbox" id="q4"><label for="q4"><span class="q-tag">Q4</span>「この文化があるから辞めない」と言う人が実際にいる</label></div>
+        <div class="diag-item"><input type="checkbox" id="q5"><label for="q5"><span class="q-tag">Q5</span>メンバーが「AIにはできない、自分の仕事のやりがい」を言える</label></div>
+        <div class="diag-item"><input type="checkbox" id="q6"><label for="q6"><span class="q-tag">Q6</span>現場の優秀人材に「経営に触れる越境機会」がある</label></div>
+        <div class="diag-item"><input type="checkbox" id="q7"><label for="q7"><span class="q-tag">Q7</span>「理念が現場の行動に表れているか」をデータで把握できている</label></div>
+        <div class="diag-item"><input type="checkbox" id="q8"><label for="q8"><span class="q-tag">Q8</span>管理職が情報集約など「AIに任せられる仕事」を手放している</label></div>
+        <div class="diag-item"><input type="checkbox" id="q9"><label for="q9"><span class="q-tag">Q9</span>業務一覧に「どれをAI、どれを人がやるか」が書かれている</label></div>
+      </div>
+      <div class="diag-group">
+        <div class="diag-group-title">後半｜Deploy ―人材と制度への実装 <span class="badge">Q10-15</span></div>
+        <div class="diag-item"><input type="checkbox" id="q10"><label for="q10"><span class="q-tag">Q10</span>採用要件に「変化への適応力」「AI協働力」が入っている</label></div>
+        <div class="diag-item"><input type="checkbox" id="q11"><label for="q11"><span class="q-tag">Q11</span>「AI活用スキル」と「人にしかできない力」を計画的に育てている</label></div>
+        <div class="diag-item"><input type="checkbox" id="q12"><label for="q12"><span class="q-tag">Q12</span>チーム編成を考える時「人＋AI」をセットで設計している</label></div>
+        <div class="diag-item"><input type="checkbox" id="q13"><label for="q13"><span class="q-tag">Q13</span>評価で「AIで測れる数字」と「人が見るしかない価値」を分けている</label></div>
+        <div class="diag-item"><input type="checkbox" id="q14"><label for="q14"><span class="q-tag">Q14</span>業績を予測する「非財務の先行指標」を自部門で設定している</label></div>
+        <div class="diag-item"><input type="checkbox" id="q15"><label for="q15"><span class="q-tag">Q15</span>情報共有・定型の会議を減らして「考える会議」に絞れている</label></div>
+      </div>
+    </div>
+
+    <div class="diag-counter">チェック数: <strong id="diagCount">0</strong> / 15</div>
+    <div class="diag-bar"><div class="diag-bar-fill" id="diagBar"></div></div>
+
+    <div class="diag-result" id="diagResult">
+      <div class="score-label">診断結果の目安</div>
+      <div class="score-num" id="diagScoreNum">0</div>
+      <div class="score-msg" id="diagMsg">まずは1つずつ、チェックしてみましょう</div>
+      <p class="score-desc" id="diagDesc">
+        ✓の数が増えるほど、AI前提で組織が連動して再設計されている状態に近づきます。0個でも問題ありません — むしろ、ここからが伸びしろです。
+      </p>
+      <div class="score-cta"><a href="https://www.henza-official.com/company.php#contact" target="_blank" rel="noopener" class="btn-secondary" style="border-color:var(--navy);">この結果について、少し話を聞いてみる →</a></div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function(){
+  const boxes = Array.from(document.querySelectorAll('.diag-panel input[type="checkbox"]'));
+  const countEl = document.getElementById('diagCount');
+  const barEl = document.getElementById('diagBar');
+  const numEl = document.getElementById('diagScoreNum');
+  const msgEl = document.getElementById('diagMsg');
+  const descEl = document.getElementById('diagDesc');
+
+  function update(){
+    const checked = boxes.filter(b=>b.checked).length;
+    countEl.textContent = checked;
+    numEl.textContent = checked;
+    barEl.style.width = (checked/15*100) + '%';
+
+    if(checked === 0){
+      msgEl.textContent = 'まずは1つずつ、チェックしてみましょう';
+      descEl.textContent = '✓の数が増えるほど、AI前提で組織が連動して再設計されている状態に近づきます。0個でも問題ありません — むしろ、ここからが伸びしろです。';
+    } else if(checked <= 5){
+      msgEl.textContent = '全体地図からの再設計余地が大きい状態です';
+      descEl.textContent = '事業・人材・制度がそれぞれ別々に動いている可能性があります。まずは全体像を描き、「あるべき姿」から逆算する設計図づくりが効果的なフェーズです。';
+    } else if(checked <= 11){
+      msgEl.textContent = '部分最適の状態。設計の連動が課題です';
+      descEl.textContent = '個々の取り組みは進んでいるものの、5つの機能(5M)がまだ連動しきっていない状態です。結節点(経営と現場のつなぎ役)を強化することで、成果が一段と伸びる可能性があります。';
+    } else {
+      msgEl.textContent = 'AX先進。連動の精度を高める段階です';
+      descEl.textContent = '組織の再設計が着実に進んでいます。次の段階は、5Mの連動精度をさらに高め、AIで生まれた時間をどこに再投資するかの設計です。';
+    }
+  }
+
+  boxes.forEach(b=>b.addEventListener('change', update));
+  update();
+})();
+</script>
+
+<!-- ===== FAQ ===== -->
+<section class="faq">
+  <div class="wrap">
+    <span class="tag">FAQ</span>
+    <h2 class="section-title">よくあるご質問</h2>
+    <div class="faq-list">
+      <details open>
+        <summary>AIやITに詳しい社員がいなくても大丈夫ですか？</summary>
+        <p>はい、基礎から学べるカリキュラムですので、AIやITに馴染みのない方でも安心してご利用いただけます。動画と演習を通じて、無理なくステップアップできます。</p>
+      </details>
+      <details>
+        <summary>何人から導入できますか？</summary>
+        <p>36アカウントから500アカウントまで対応しています。部署単位の小規模導入から全社展開まで、貴社の規模に合わせてご利用いただけます。</p>
+      </details>
+      <details>
+        <summary>導入してすぐに効果は出ますか？</summary>
+        <p>学習と並行して業務実装支援を行うため、学んだ内容を実際の業務に落とし込みながら進められます。導入企業様からは、数ヵ月単位で業務効率化の効果が出ているとの声をいただいています。</p>
+      </details>
+      <details>
+        <summary>契約期間や料金体系について教えてください。</summary>
+        <p>法人向けに12ヵ月契約、月額250,000円(36〜500アカウントまで)でご提供しています。まずは無料デモアカウントでサービスをお試しいただけます。</p>
+      </details>
+      <details>
+        <summary>沖縄県外の企業でも利用できますか？</summary>
+        <p>お問い合わせください。個別の事情に応じてご案内いたします。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ===== GALLERY ===== -->
+<section class="gallery">
+  <div class="wrap">
+    <span class="tag">CURATORZ ACADEMY</span>
+    <h2 class="section-title">「AIで回る会社」へ</h2>
+    <p class="section-lead">社員全員がAIキュレーターになる。雑務を減らすための「教育 × AI業務OS」です。</p>
+
+    <svg width="100%" viewBox="0 0 680 420" role="img" xmlns="http://www.w3.org/2000/svg" style="display:block;border-radius:2px;border:1px solid #E2DCCB;">
+      <title>AIで回る会社へ — Before/After比較イラスト</title>
+      <desc>左がBefore（人が全業務を担う疲弊した状態）、右がAfter（AIと人が役割分担し成果が伸びる状態）の対比図</desc>
+      <defs>
+        <marker id="garr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+          <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </marker>
+      </defs>
+
+      <!-- Background panels -->
+      <rect x="0" y="0" width="310" height="420" fill="#F7F4ED"/>
+      <rect x="370" y="0" width="310" height="420" fill="#1A2B3D"/>
+      <!-- Center divider -->
+      <rect x="310" y="0" width="60" height="420" fill="#EDE9E0"/>
+      <line x1="340" y1="130" x2="340" y2="290" stroke="#C9874A" stroke-width="2" stroke-dasharray="4 3"/>
+      <path d="M330 196 L340 180 L350 196" fill="none" stroke="#C9874A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M330 224 L340 240 L350 224" fill="none" stroke="#C9874A" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- === LEFT: BEFORE === -->
+      <rect x="18" y="16" width="68" height="22" fill="#6B7280" rx="2"/>
+      <text x="52" y="31" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing="1">BEFORE</text>
+
+      <!-- Person face -->
+      <circle cx="155" cy="88" r="22" fill="#2C4258"/>
+      <text x="155" y="95" text-anchor="middle" font-family="sans-serif" font-size="18" fill="#9AA7B4">😓</text>
+
+      <!-- Task boxes -->
+      <rect x="58" y="128" width="90" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="103" y="146" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">議事録作成</text>
+
+      <rect x="162" y="122" width="96" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="210" y="140" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">資料作成・修正</text>
+
+      <rect x="38" y="170" width="92" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="84" y="188" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">SNS投稿・管理</text>
+
+      <rect x="144" y="166" width="112" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="200" y="184" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">問い合わせ対応</text>
+
+      <rect x="52" y="212" width="104" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="104" y="230" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">データ集計・転記</text>
+
+      <rect x="166" y="210" width="96" height="28" fill="#fff" stroke="#E2DCCB" stroke-width="1" rx="2"/>
+      <text x="214" y="228" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#1A2B3D">スケジュール調整</text>
+
+      <!-- Before result -->
+      <line x1="155" y1="258" x2="155" y2="290" stroke="#C0392B" stroke-width="1.5" marker-end="url(#garr)"/>
+      <text x="155" y="316" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="700" fill="#C0392B">時間が足りない</text>
+      <text x="155" y="334" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6B7280">成果につながらない</text>
+      <text x="155" y="350" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#6B7280">雑務に追われ続ける</text>
+      <text x="155" y="390" text-anchor="middle" font-family="sans-serif" font-size="28" fill="#C0392B">✕</text>
+
+      <!-- === RIGHT: AFTER === -->
+      <rect x="594" y="16" width="68" height="22" fill="#C9874A" rx="2"/>
+      <text x="628" y="31" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" font-weight="700" fill="#fff" letter-spacing="1">AFTER</text>
+
+      <!-- AI chip -->
+      <rect x="488" y="56" width="104" height="66" fill="#C9874A" rx="6"/>
+      <text x="540" y="81" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="13" font-weight="700" fill="#fff">AI</text>
+      <text x="540" y="97" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#F7F4ED">Business OS</text>
+      <!-- pins -->
+      <line x1="488" y1="72" x2="476" y2="72" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="488" y1="82" x2="476" y2="82" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="488" y1="92" x2="476" y2="92" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="592" y1="72" x2="604" y2="72" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="592" y1="82" x2="604" y2="82" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="592" y1="92" x2="604" y2="92" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="506" y1="56" x2="506" y2="44" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="522" y1="56" x2="522" y2="44" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="538" y1="56" x2="538" y2="44" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="554" y1="56" x2="554" y2="44" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="506" y1="122" x2="506" y2="134" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="522" y1="122" x2="522" y2="134" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="538" y1="122" x2="538" y2="134" stroke="#E8C896" stroke-width="1.5"/>
+      <line x1="554" y1="122" x2="554" y2="134" stroke="#E8C896" stroke-width="1.5"/>
+
+      <!-- AI task boxes -->
+      <rect x="378" y="148" width="106" height="28" fill="#2C4258" rx="2"/>
+      <text x="431" y="166" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#E8C896">議事録 → 自動生成</text>
+
+      <rect x="496" y="148" width="106" height="28" fill="#2C4258" rx="2"/>
+      <text x="549" y="166" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#E8C896">資料 → 3分で完成</text>
+
+      <rect x="378" y="190" width="106" height="28" fill="#2C4258" rx="2"/>
+      <text x="431" y="208" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#E8C896">SNS → 自動展開</text>
+
+      <rect x="496" y="190" width="106" height="28" fill="#2C4258" rx="2"/>
+      <text x="549" y="208" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#E8C896">問い合わせ → AI対応</text>
+
+      <!-- Connector lines -->
+      <line x1="488" y1="98" x2="431" y2="148" stroke="#C9874A" stroke-width="0.8" stroke-dasharray="3 2" fill="none"/>
+      <line x1="540" y1="122" x2="540" y2="148" stroke="#C9874A" stroke-width="0.8" stroke-dasharray="3 2" fill="none"/>
+      <line x1="592" y1="98" x2="549" y2="148" stroke="#C9874A" stroke-width="0.8" stroke-dasharray="3 2" fill="none"/>
+      <line x1="488" y1="106" x2="431" y2="190" stroke="#C9874A" stroke-width="0.8" stroke-dasharray="3 2" fill="none"/>
+      <line x1="592" y1="106" x2="549" y2="190" stroke="#C9874A" stroke-width="0.8" stroke-dasharray="3 2" fill="none"/>
+
+      <!-- Human focus box -->
+      <rect x="412" y="236" width="216" height="38" fill="#1A2B3D" stroke="#C9874A" stroke-width="1" rx="3"/>
+      <text x="520" y="251" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" font-weight="700" fill="#E8C896">人は「判断・創造・対話」に集中</text>
+      <text x="520" y="265" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="10" fill="#9AA7B4">AIにできない仕事だけを担う</text>
+
+      <!-- After result -->
+      <line x1="520" y1="284" x2="520" y2="306" stroke="#2E7D5C" stroke-width="1.5" marker-end="url(#garr)"/>
+      <text x="520" y="328" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="12" font-weight="700" fill="#E8C896">業務スピードが上がる</text>
+      <text x="520" y="346" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#9AA7B4">売上・質・スピードが伸びる</text>
+      <text x="520" y="362" text-anchor="middle" font-family="'Noto Sans JP',sans-serif" font-size="11" fill="#9AA7B4">組織のITリテラシーが底上げされる</text>
+      <text x="520" y="396" text-anchor="middle" font-family="sans-serif" font-size="26" fill="#C9874A">◎</text>
+
+      <!-- Center label vertical -->
+      <text x="340" y="222" text-anchor="middle" font-family="'Noto Serif JP',serif" font-size="11" font-weight="700" fill="#C9874A" writing-mode="tb">Curatorz Academy</text>
+    </svg>
+
+    <p class="gallery-caption" style="margin-top:14px;">
+      Before: 企画書2時間・バナー外注・SNS毎回悩む　→　After: ペライチ資料3分・バナー/SNS自動展開・修正回数激減
+    </p>
+  </div>
+</section>
+
+<!-- ===== FINAL CTA ===== -->
+<section class="final-cta" id="cta">
+  <div class="wrap final-cta-inner">
+    <h2>「興味はあるが、まだ動いていない」<br>その一歩を、<em>今ここで</em>。</h2>
+    <p>AIやDXへの取り組みは、早く始めるほど差がつきます。まずは無料デモアカウントで、Curatorz Academyの学習体験と実装支援の一部をご体感ください。</p>
+    <div class="final-ctas">
+      <a href="demo.html" class="btn-primary">無料デモアカウントを申し込む →</a>
+      <a href="download.html" class="btn-secondary">資料請求はこちら</a>
+      <a href="https://www.henza-official.com/company.php#contact" target="_blank" rel="noopener" class="btn-secondary">まずは話だけ聞いてみる</a>
+    </div>
+    <p class="final-note">ご相談・お見積りは無料です。お気軽にお問い合わせください。</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="fc-title">株式会社HENZA</div>
+        <p>〒900-0015<br>沖縄県那覇市久茂地2丁目2-2 タイムスビル2階</p>
+        <p>ブランディングとデジタルマーケティングを通して<br>豊かな社会の創造に貢献する。</p>
+      </div>
+      <div class="footer-col">
+        <div class="fc-title">事業紹介</div>
+        <ul>
+          <li><a href="https://www.henza-official.com/company.php" target="_blank" rel="noopener">会社概要</a></li>
+          <li><a href="https://www.henza-official.com/openinnovation.php" target="_blank" rel="noopener">オープンイノベーション事業</a></li>
+          <li><a href="https://www.henza-official.com/curatorzacademy.php" target="_blank" rel="noopener">キュレーターズアカデミー事業</a></li>
+          <li><a href="https://www.henza-official.com/ai.php" target="_blank" rel="noopener">AI事業</a></li>
+          <li><a href="https://www.henza-official.com/brand.php#top_2" target="_blank" rel="noopener">GALLERY HENZA事業</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="fc-title">お問い合わせ</div>
+        <ul>
+          <li><a href="https://www.henza-official.com/company.php#contact" target="_blank" rel="noopener">お問い合わせフォーム</a></li>
+          <li><a href="https://www.henza-official.com/" target="_blank" rel="noopener">公式サイトトップ</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="operator">Curatorz Academyは株式会社HENZAが運営しています。</p>
+      &copy; HENZA inc.
+    </div>
+  </div>
+</footer>
+
+<!-- コンバージョンイベント（CTAクリック時） -->
+<script>
+(function(){
+  // 全CTAボタン（#ctaリンク）にコンバージョンイベントを付与
+  document.querySelectorAll('a[href="#cta"], a[href="#"]').forEach(function(el){
+    el.addEventListener('click', function(){
+      // Meta Pixel：リード獲得イベント
+      if(typeof fbq !== 'undefined'){
+        fbq('track', 'Lead');
+      }
+      // Google広告：コンバージョン送信
+      if(typeof gtag !== 'undefined'){
+        gtag('event', 'conversion', {
+          'send_to': 'GOOGLE_ADS_ID/GOOGLE_ADS_CONV_LABEL'
+        });
+      }
+      // GA4：カスタムイベント
+      if(typeof gtag !== 'undefined'){
+        gtag('event', 'cta_click', {
+          'event_category': 'engagement',
+          'event_label': el.textContent.trim()
+        });
+      }
+    });
+  });
+})();
+</script>
+</body>
+</html>

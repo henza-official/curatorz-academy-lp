@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>資料ダウンロード | Curatorz Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1A2B3D;--navy-soft:#2C4258;--amber:#C9874A;
+  --gold:#E8C896;--cream:#F7F4ED;--gray:#6B7280;--line:#E2DCCB;
+  --err:#C0392B;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--navy);line-height:1.8;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+header{
+  background:rgba(247,244,237,0.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.logo{font-family:'Noto Serif JP',serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;}
+.logo span{color:var(--amber);}
+.back-link{font-size:0.82rem;color:var(--gray);display:flex;align-items:center;gap:6px;transition:color 0.2s;}
+.back-link:hover{color:var(--amber);}
+
+/* layout */
+.page-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  max-width:1000px;margin:0 auto;
+  min-height:calc(100vh - 62px);
+}
+
+/* ===== Left: doc preview ===== */
+.doc-side{
+  background:var(--navy);color:#fff;
+  padding:56px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.doc-eyebrow{
+  font-size:0.7rem;letter-spacing:0.22em;color:var(--gold);font-weight:700;
+  display:flex;align-items:center;gap:10px;margin-bottom:18px;
+}
+.doc-eyebrow::before{content:'';width:20px;height:1px;background:var(--gold);}
+.doc-title{
+  font-family:'Noto Serif JP',serif;font-weight:900;
+  font-size:clamp(1.4rem,2.5vw,1.9rem);line-height:1.55;
+  margin-bottom:18px;
+}
+.doc-title em{font-style:normal;color:var(--gold);}
+.doc-desc{color:#C7CFD8;font-size:0.9rem;margin-bottom:32px;line-height:1.9;}
+
+.doc-contents{
+  border:1px solid rgba(255,255,255,0.15);border-radius:2px;
+  padding:22px;margin-bottom:32px;
+  background:rgba(255,255,255,0.04);
+}
+.doc-contents .dc-title{
+  font-size:0.72rem;letter-spacing:0.15em;color:var(--gold);
+  font-weight:700;margin-bottom:12px;
+}
+.doc-contents ul{list-style:none;}
+.doc-contents li{
+  font-size:0.88rem;color:#D6DCE2;padding:7px 0;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  display:flex;align-items:center;gap:8px;
+}
+.doc-contents li:last-child{border-bottom:none;}
+.doc-contents li::before{
+  content:'';width:5px;height:5px;background:var(--amber);
+  transform:rotate(45deg);flex:none;
+}
+
+.doc-meta{display:flex;gap:20px;flex-wrap:wrap;}
+.doc-meta-item{
+  font-size:0.78rem;color:#9AA7B4;
+  display:flex;align-items:center;gap:6px;
+}
+.doc-meta-item span{color:var(--gold);font-weight:700;}
+
+/* ===== Right: form ===== */
+.form-side{
+  background:#fff;
+  padding:56px 48px;
+  display:flex;flex-direction:column;justify-content:center;
+}
+.form-heading{
+  font-family:'Noto Serif JP',serif;font-weight:900;
+  font-size:1.4rem;margin-bottom:8px;
+}
+.form-sub{color:var(--gray);font-size:0.88rem;margin-bottom:28px;}
+
+.field{margin-bottom:18px;}
+.field label{
+  display:flex;align-items:center;gap:7px;
+  font-size:0.84rem;font-weight:700;color:var(--navy);margin-bottom:6px;
+}
+.required{font-size:0.66rem;background:var(--amber);color:#fff;padding:2px 6px;border-radius:2px;}
+.optional{font-size:0.66rem;background:var(--line);color:var(--gray);padding:2px 6px;border-radius:2px;}
+.field input,.field select{
+  width:100%;border:1px solid var(--line);border-radius:2px;
+  padding:10px 14px;font-size:0.91rem;font-family:inherit;
+  color:var(--navy);background:#fff;
+  transition:border-color 0.2s,box-shadow 0.2s;-webkit-appearance:none;
+}
+.field input:focus,.field select:focus{
+  outline:none;border-color:var(--amber);
+  box-shadow:0 0 0 3px rgba(201,135,74,0.15);
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;cursor:pointer;
+}
+.field input.error,.field select.error{border-color:var(--err);}
+.field-error{font-size:0.76rem;color:var(--err);margin-top:5px;display:none;}
+.field input.error ~ .field-error,
+.field select.error ~ .field-error{display:block;}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+
+.privacy-check{
+  display:flex;align-items:flex-start;gap:10px;
+  margin:18px 0;padding:14px;
+  background:var(--cream);border:1px solid var(--line);border-radius:2px;cursor:pointer;
+}
+.privacy-check input{width:17px;height:17px;margin-top:2px;flex:none;accent-color:var(--amber);}
+.privacy-check label{font-size:0.82rem;cursor:pointer;line-height:1.7;}
+.privacy-check label a{color:var(--amber);text-decoration:underline;}
+
+.submit-btn{
+  width:100%;background:var(--amber);color:var(--navy);
+  border:none;border-radius:2px;
+  padding:15px 24px;font-size:0.97rem;font-weight:700;font-family:inherit;
+  cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.25s;
+}
+.submit-btn:hover{background:var(--gold);}
+.submit-btn:disabled{background:var(--gray);color:#fff;cursor:not-allowed;}
+.submit-note{text-align:center;font-size:0.76rem;color:var(--gray);margin-top:10px;}
+
+/* ===== Thank you ===== */
+.thankyou{display:none;text-align:center;}
+.ty-icon{font-size:3rem;margin-bottom:16px;}
+.ty-title{font-family:'Noto Serif JP',serif;font-weight:900;font-size:1.5rem;margin-bottom:12px;}
+.ty-msg{color:var(--gray);font-size:0.9rem;margin-bottom:28px;line-height:1.9;}
+.dl-btn{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--navy);color:#fff;
+  padding:14px 28px;border-radius:2px;font-weight:700;font-size:0.95rem;
+  transition:background 0.25s;margin-bottom:16px;
+}
+.dl-btn:hover{background:var(--amber);}
+.ty-back{
+  display:block;font-size:0.82rem;color:var(--gray);margin-top:8px;
+  text-decoration:underline;transition:color 0.2s;
+}
+.ty-back:hover{color:var(--amber);}
+
+/* ===== Mobile ===== */
+@media(max-width:720px){
+  .page-inner{grid-template-columns:1fr;}
+  .doc-side{padding:40px 20px;}
+  .form-side{padding:36px 20px;}
+  .field-row{grid-template-columns:1fr;}
+  .doc-title{font-size:1.35rem;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Curatorz<span>Academy</span></div>
+  <a href="index.html" class="back-link">← LPに戻る</a>
+</header>
+
+<div class="page-inner">
+
+  <!-- 左：資料紹介 -->
+  <div class="doc-side">
+    <div class="doc-eyebrow">FREE DOCUMENT</div>
+    <h1 class="doc-title">
+      AIで「効率化」して終わる会社と、<br>
+      <em>「成果が伸びる」会社</em>の分かれ目。
+    </h1>
+    <p class="doc-desc">
+      AI時代の組織変革フレーム「5M」設計図。経営者のための実践ガイドを無料でダウンロードいただけます。
+    </p>
+
+    <div class="doc-contents">
+      <div class="dc-title">CONTENTS</div>
+      <ul>
+        <li>AIが変える3つの組織構造</li>
+        <li>再設計フレーム「5M」とは何か</li>
+        <li>5M全体を「連動させて再設計」する方法</li>
+        <li>AI時代の結節点格差とは</li>
+        <li>変革の進め方「3Dステップ」</li>
+        <li>自己診断チェックリスト15問（解説付き）</li>
+      </ul>
+    </div>
+
+    <div class="doc-meta">
+      <div class="doc-meta-item">📄 PDF <span>13ページ</span></div>
+      <div class="doc-meta-item">🏢 対象 <span>経営層・管理職</span></div>
+      <div class="doc-meta-item">💰 価格 <span>無料</span></div>
+    </div>
+  </div>
+
+  <!-- 右：フォーム -->
+  <div class="form-side">
+    <div id="formSection">
+      <h2 class="form-heading">資料をダウンロードする</h2>
+      <p class="form-sub">以下の情報をご入力いただくと、すぐにダウンロードできます。</p>
+
+      <div class="field field-row">
+        <div class="field">
+          <label>姓 <span class="required">必須</span></label>
+          <input type="text" id="lastName" placeholder="山田" autocomplete="family-name">
+          <div class="field-error">姓を入力してください</div>
+        </div>
+        <div class="field">
+          <label>名 <span class="required">必須</span></label>
+          <input type="text" id="firstName" placeholder="太郎" autocomplete="given-name">
+          <div class="field-error">名を入力してください</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" id="email" placeholder="taro@example.com" autocomplete="email">
+        <div class="field-error">有効なメールアドレスを入力してください</div>
+      </div>
+
+      <div class="field">
+        <label>会社名 <span class="required">必須</span></label>
+        <input type="text" id="company" placeholder="株式会社HENZA" autocomplete="organization">
+        <div class="field-error">会社名を入力してください</div>
+      </div>
+
+      <div class="field">
+        <label>役職 <span class="optional">任意</span></label>
+        <input type="text" id="position" placeholder="代表取締役" autocomplete="organization-title">
+      </div>
+
+      <div class="field">
+        <label>従業員数 <span class="required">必須</span></label>
+        <select id="employees">
+          <option value="">選択してください</option>
+          <option value="35-50">35〜50名</option>
+          <option value="51-100">51〜100名</option>
+          <option value="101-200">101〜200名</option>
+          <option value="201-500">201〜500名</option>
+          <option value="500+">500名以上</option>
+        </select>
+        <div class="field-error">従業員数を選択してください</div>
+      </div>
+
+      <div class="privacy-check">
+        <input type="checkbox" id="privacy">
+        <label for="privacy">
+          <a href="https://www.henza-official.com/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意の上、送信します
+        </label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+        無料で資料をダウンロードする →
+      </button>
+      <p class="submit-note">入力30秒 · 登録不要 · すぐにダウンロードできます</p>
+    </div>
+
+    <!-- サンクス＋DLボタン -->
+    <div class="thankyou" id="thankyou">
+      <div class="ty-icon">📄</div>
+      <h2 class="ty-title">ご登録ありがとうございます</h2>
+      <p class="ty-msg">
+        下のボタンから資料をダウンロードしてください。<br>
+        またメールにもダウンロードリンクをお送りします。
+      </p>
+      <a href="HENZA_AI導入リードマグネット_組織AX5M.pdf" download class="dl-btn">
+        📥 資料をダウンロードする（PDF）
+      </a>
+      <a href="index.html" class="ty-back">← LPトップに戻る</a>
+    </div>
+  </div>
+
+</div>
+
+<script>
+function validate(){
+  let ok = true;
+  const fields = [
+    {id:'lastName',  check: v => v.trim().length > 0},
+    {id:'firstName', check: v => v.trim().length > 0},
+    {id:'email',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)},
+    {id:'company',   check: v => v.trim().length > 0},
+    {id:'employees', check: v => v !== ''},
+  ];
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const err = el.nextElementSibling;
+    if(!f.check(el.value)){
+      el.classList.add('error');
+      if(err && err.classList.contains('field-error')) err.style.display='block';
+      ok = false;
+    } else {
+      el.classList.remove('error');
+      if(err && err.classList.contains('field-error')) err.style.display='none';
+    }
+  });
+  if(!document.getElementById('privacy').checked){
+    alert('プライバシーポリシーへの同意をご確認ください。');
+    ok = false;
+  }
+  return ok;
+}
+
+function handleSubmit(){
+  if(!validate()) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '送信中...';
+  setTimeout(() => {
+    document.getElementById('formSection').style.display='none';
+    document.getElementById('thankyou').style.display='block';
+  }, 600);
+}
+
+document.querySelectorAll('input, select').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    const err = el.nextElementSibling;
+    if(err && err.classList.contains('field-error')) err.style.display='none';
+  });
+});
+</script>
+</body>
+</html>

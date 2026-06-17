@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>無料デモアカウント申込 | Curatorz Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@700;900&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1A2B3D;--navy-soft:#2C4258;--amber:#C9874A;
+  --gold:#E8C896;--cream:#F7F4ED;--gray:#6B7280;--line:#E2DCCB;
+  --err:#C0392B;--ok:#2E7D5C;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--cream);color:var(--navy);line-height:1.8;-webkit-font-smoothing:antialiased;}
+a{color:inherit;text-decoration:none;}
+
+/* ===== Header ===== */
+header{
+  background:rgba(247,244,237,0.95);backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);padding:16px 24px;
+  display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;z-index:10;
+}
+.logo{font-family:'Noto Serif JP',serif;font-weight:900;font-size:1.2rem;letter-spacing:0.05em;}
+.logo span{color:var(--amber);}
+.back-link{
+  font-size:0.82rem;color:var(--gray);
+  display:flex;align-items:center;gap:6px;
+  transition:color 0.2s;
+}
+.back-link:hover{color:var(--amber);}
+
+/* ===== Page layout ===== */
+.page{max-width:640px;margin:0 auto;padding:56px 24px 80px;}
+
+/* ===== Eyebrow / Title ===== */
+.page-eyebrow{
+  font-size:0.72rem;letter-spacing:0.22em;color:var(--amber);font-weight:700;
+  display:flex;align-items:center;gap:10px;margin-bottom:14px;
+}
+.page-eyebrow::before{content:'';width:24px;height:1px;background:var(--amber);}
+.page-title{
+  font-family:'Noto Serif JP',serif;font-weight:900;
+  font-size:clamp(1.6rem,4vw,2.1rem);line-height:1.5;
+  margin-bottom:12px;
+}
+.page-title em{font-style:normal;color:var(--amber);}
+.page-lead{color:var(--gray);font-size:0.93rem;margin-bottom:36px;line-height:1.9;}
+
+/* ===== Trial badge ===== */
+.trial-badge{
+  background:var(--navy);color:#fff;
+  border-radius:2px;padding:18px 22px;
+  display:flex;align-items:center;gap:16px;
+  margin-bottom:36px;
+}
+.trial-badge .tb-icon{font-size:1.6rem;}
+.trial-badge .tb-text{font-size:0.88rem;line-height:1.7;color:#D6DCE2;}
+.trial-badge .tb-text strong{color:var(--gold);font-size:1rem;display:block;margin-bottom:2px;}
+
+/* ===== Form ===== */
+.form-card{background:#fff;border:1px solid var(--line);border-radius:2px;padding:36px 32px;}
+.form-section-title{
+  font-family:'Noto Serif JP',serif;font-weight:700;font-size:1rem;
+  color:var(--navy);margin:28px 0 18px;padding-top:24px;
+  border-top:1px solid var(--line);
+}
+.form-section-title:first-of-type{margin-top:0;padding-top:0;border-top:none;}
+
+.field{margin-bottom:20px;}
+.field label{
+  display:flex;align-items:center;gap:8px;
+  font-size:0.86rem;font-weight:700;color:var(--navy);
+  margin-bottom:7px;
+}
+.required{
+  font-size:0.68rem;background:var(--amber);color:#fff;
+  padding:2px 6px;border-radius:2px;letter-spacing:0.05em;
+}
+.optional{
+  font-size:0.68rem;background:var(--line);color:var(--gray);
+  padding:2px 6px;border-radius:2px;letter-spacing:0.05em;
+}
+.field input,
+.field select,
+.field textarea{
+  width:100%;
+  border:1px solid var(--line);border-radius:2px;
+  padding:11px 14px;font-size:0.92rem;font-family:inherit;
+  color:var(--navy);background:#fff;
+  transition:border-color 0.2s,box-shadow 0.2s;
+  -webkit-appearance:none;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus{
+  outline:none;
+  border-color:var(--amber);
+  box-shadow:0 0 0 3px rgba(201,135,74,0.15);
+}
+.field select{
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B7280' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 14px center;
+  padding-right:36px;cursor:pointer;
+}
+.field textarea{resize:vertical;min-height:100px;}
+.field-hint{font-size:0.78rem;color:var(--gray);margin-top:6px;}
+.field-error{font-size:0.78rem;color:var(--err);margin-top:6px;display:none;}
+
+.field input.error,
+.field select.error,
+.field textarea.error{border-color:var(--err);}
+.field input.error + .field-error,
+.field select.error + .field-error,
+.field textarea.error + .field-error{display:block;}
+
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+
+/* privacy */
+.privacy-check{
+  display:flex;align-items:flex-start;gap:10px;
+  margin:24px 0;padding:16px;
+  background:var(--cream);border:1px solid var(--line);border-radius:2px;
+  cursor:pointer;
+}
+.privacy-check input{width:18px;height:18px;margin-top:2px;flex:none;accent-color:var(--amber);}
+.privacy-check label{font-size:0.84rem;color:var(--navy);cursor:pointer;line-height:1.7;}
+.privacy-check label a{color:var(--amber);text-decoration:underline;}
+
+/* Submit */
+.submit-btn{
+  width:100%;background:var(--navy);color:#fff;
+  border:none;border-radius:2px;
+  padding:17px 24px;font-size:1rem;font-weight:700;font-family:inherit;
+  cursor:pointer;letter-spacing:0.04em;
+  transition:background 0.25s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.submit-btn:hover{background:var(--amber);}
+.submit-btn:disabled{background:var(--gray);cursor:not-allowed;}
+.submit-note{text-align:center;font-size:0.78rem;color:var(--gray);margin-top:12px;}
+
+/* ===== Thank you screen ===== */
+.thankyou{display:none;text-align:center;padding:48px 0;}
+.ty-icon{font-size:3.2rem;margin-bottom:18px;}
+.ty-title{
+  font-family:'Noto Serif JP',serif;font-weight:900;
+  font-size:1.6rem;margin-bottom:14px;
+}
+.ty-msg{color:var(--gray);font-size:0.93rem;margin-bottom:32px;line-height:1.9;}
+.ty-back{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--navy);color:#fff;
+  padding:13px 26px;border-radius:2px;font-weight:700;font-size:0.9rem;
+  transition:background 0.25s;
+}
+.ty-back:hover{background:var(--amber);}
+
+/* ===== Mobile ===== */
+@media(max-width:560px){
+  .page{padding:36px 16px 60px;}
+  .form-card{padding:24px 18px;}
+  .field-row{grid-template-columns:1fr;}
+  .trial-badge{flex-direction:column;gap:10px;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">Curatorz<span>Academy</span></div>
+  <a href="index.html" class="back-link">← LPに戻る</a>
+</header>
+
+<div class="page">
+  <!-- 通常フォーム -->
+  <div id="formSection">
+    <div class="page-eyebrow">FREE DEMO ACCOUNT</div>
+    <h1 class="page-title"><em>無料</em>デモアカウント申込</h1>
+    <p class="page-lead">
+      フォームにご入力いただくと、担当者よりご連絡いたします。デモアカウントの発行まで通常2〜3営業日いただいております。
+    </p>
+
+    <div class="trial-badge">
+      <div class="tb-icon">🎁</div>
+      <div class="tb-text">
+        <strong>無料トライアルについて</strong>
+        デモアカウントでは、Curatorz Academyの学習コンテンツ・演習問題・管理画面の一部を体験いただけます。契約不要・クレジットカード不要でお試しいただけます。
+      </div>
+    </div>
+
+    <div class="form-card">
+      <div class="form-section-title">ご担当者情報</div>
+
+      <div class="field field-row">
+        <div class="field">
+          <label>姓 <span class="required">必須</span></label>
+          <input type="text" id="lastName" placeholder="山田" autocomplete="family-name">
+          <div class="field-error">姓を入力してください</div>
+        </div>
+        <div class="field">
+          <label>名 <span class="required">必須</span></label>
+          <input type="text" id="firstName" placeholder="太郎" autocomplete="given-name">
+          <div class="field-error">名を入力してください</div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label>メールアドレス <span class="required">必須</span></label>
+        <input type="email" id="email" placeholder="taro@example.com" autocomplete="email">
+        <div class="field-error">有効なメールアドレスを入力してください</div>
+      </div>
+
+      <div class="field">
+        <label>電話番号 <span class="required">必須</span></label>
+        <input type="tel" id="tel" placeholder="098-000-0000" autocomplete="tel">
+        <div class="field-error">電話番号を入力してください</div>
+      </div>
+
+      <div class="form-section-title">会社情報</div>
+
+      <div class="field">
+        <label>会社名 <span class="required">必須</span></label>
+        <input type="text" id="company" placeholder="株式会社HENZA" autocomplete="organization">
+        <div class="field-error">会社名を入力してください</div>
+      </div>
+
+      <div class="field">
+        <label>役職 <span class="optional">任意</span></label>
+        <input type="text" id="position" placeholder="代表取締役" autocomplete="organization-title">
+      </div>
+
+      <div class="field">
+        <label>従業員数 <span class="required">必須</span></label>
+        <select id="employees">
+          <option value="">選択してください</option>
+          <option value="35-50">35〜50名</option>
+          <option value="51-100">51〜100名</option>
+          <option value="101-200">101〜200名</option>
+          <option value="201-500">201〜500名</option>
+          <option value="500+">500名以上</option>
+        </select>
+        <div class="field-error">従業員数を選択してください</div>
+      </div>
+
+      <div class="field">
+        <label>業種 <span class="optional">任意</span></label>
+        <select id="industry">
+          <option value="">選択してください</option>
+          <option value="製造業">製造業</option>
+          <option value="サービス業">サービス業</option>
+          <option value="小売業">小売業</option>
+          <option value="建設業">建設業</option>
+          <option value="医療・福祉">医療・福祉</option>
+          <option value="観光・宿泊">観光・宿泊</option>
+          <option value="IT・通信">IT・通信</option>
+          <option value="飲食業">飲食業</option>
+          <option value="その他">その他</option>
+        </select>
+      </div>
+
+      <div class="form-section-title">お問い合わせ内容</div>
+
+      <div class="field">
+        <label>ご興味・ご要望 <span class="optional">任意</span></label>
+        <textarea id="message" placeholder="気になっていること、現在お困りのことなど、お気軽にご記入ください。"></textarea>
+      </div>
+
+      <div class="privacy-check">
+        <input type="checkbox" id="privacy">
+        <label for="privacy">
+          <a href="https://www.henza-official.com/" target="_blank" rel="noopener">プライバシーポリシー</a>に同意の上、送信します
+        </label>
+      </div>
+
+      <button class="submit-btn" id="submitBtn" onclick="handleSubmit()">
+        無料デモアカウントを申し込む →
+      </button>
+      <p class="submit-note">送信後、2〜3営業日以内に担当者よりご連絡します</p>
+    </div>
+  </div>
+
+  <!-- サンクス画面 -->
+  <div class="thankyou" id="thankyou">
+    <div class="ty-icon">✅</div>
+    <h2 class="ty-title">お申し込みありがとうございます</h2>
+    <p class="ty-msg">
+      ご入力いただいた内容を確認の上、<br>
+      担当者より2〜3営業日以内にご連絡いたします。<br><br>
+      しばらくお待ちいただけますと幸いです。<br>
+      引き続き、Curatorz Academyをよろしくお願いいたします。
+    </p>
+    <a href="index.html" class="ty-back">← LPトップに戻る</a>
+  </div>
+</div>
+
+<script>
+function validate(){
+  let ok = true;
+  const fields = [
+    {id:'lastName',  check: v => v.trim().length > 0},
+    {id:'firstName', check: v => v.trim().length > 0},
+    {id:'email',     check: v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)},
+    {id:'tel',       check: v => v.trim().length > 0},
+    {id:'company',   check: v => v.trim().length > 0},
+    {id:'employees', check: v => v !== ''},
+  ];
+  fields.forEach(f => {
+    const el = document.getElementById(f.id);
+    const err = el.nextElementSibling;
+    if(!f.check(el.value)){
+      el.classList.add('error');
+      if(err && err.classList.contains('field-error')) err.style.display='block';
+      ok = false;
+    } else {
+      el.classList.remove('error');
+      if(err && err.classList.contains('field-error')) err.style.display='none';
+    }
+  });
+  if(!document.getElementById('privacy').checked){
+    alert('プライバシーポリシーへの同意をご確認ください。');
+    ok = false;
+  }
+  return ok;
+}
+
+function handleSubmit(){
+  if(!validate()) return;
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '送信中...';
+  // 実際の送信処理はここに追加（Formspree / メールサービス等）
+  setTimeout(() => {
+    document.getElementById('formSection').style.display='none';
+    document.getElementById('thankyou').style.display='block';
+    window.scrollTo({top:0,behavior:'smooth'});
+  }, 800);
+}
+
+// リアルタイムバリデーション解除
+document.querySelectorAll('input, select, textarea').forEach(el => {
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    const err = el.nextElementSibling;
+    if(err && err.classList.contains('field-error')) err.style.display='none';
+  });
+});
+</script>
+</body>
+</html>
