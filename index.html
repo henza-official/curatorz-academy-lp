@@ -404,33 +404,50 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ===== Press mention ===== */
   .press{background:var(--cream);padding:48px 0;}
+  .press-grid{
+    max-width:980px;margin:0 auto;
+    display:grid;grid-template-columns:1fr 1fr;gap:20px;
+  }
   .press-inner{
-    max-width:760px;margin:0 auto;
     border:1px solid var(--line);background:#fff;
-    border-radius:6px;padding:30px 32px;
-    display:flex;gap:24px;align-items:flex-start;
+    border-radius:6px;padding:28px 26px;
+    display:flex;gap:18px;align-items:flex-start;
+    text-decoration:none;color:inherit;
+  }
+  .press-inner-link{
+    transition:border-color 0.2s,box-shadow 0.2s,transform 0.2s;
+    cursor:pointer;
+  }
+  .press-inner-link:hover{
+    border-color:var(--amber);
+    box-shadow:0 4px 14px rgba(201,135,74,0.15);
+    transform:translateY(-2px);
   }
   .press-icon{
-    flex:none;width:48px;height:48px;border-radius:50%;
+    flex:none;width:46px;height:46px;border-radius:50%;
     background:var(--navy);color:var(--gold);
     display:flex;align-items:center;justify-content:center;
-    font-size:22px;
+    font-size:20px;
   }
   .press-body .press-eyebrow{
-    font-size:0.72rem;letter-spacing:0.1em;color:var(--amber);
+    font-size:0.7rem;letter-spacing:0.1em;color:var(--amber);
     font-weight:700;margin-bottom:8px;
   }
   .press-body .press-quote{
     font-family:'Noto Serif JP',serif;font-weight:700;
-    font-size:1.02rem;color:var(--navy);line-height:1.7;
+    font-size:0.96rem;color:var(--navy);line-height:1.65;
     margin-bottom:10px;
   }
-  .press-body .press-desc{font-size:0.85rem;color:var(--gray);line-height:1.8;margin-bottom:14px;}
-  .press-logos{display:flex;flex-wrap:wrap;gap:10px;}
+  .press-body .press-desc{font-size:0.82rem;color:var(--gray);line-height:1.8;margin-bottom:14px;}
+  .press-logos{display:flex;flex-wrap:wrap;gap:10px;align-items:center;}
   .press-logo{
-    font-size:0.78rem;font-weight:700;color:var(--navy-soft);
+    font-size:0.76rem;font-weight:700;color:var(--navy-soft);
     border:1px solid var(--line);border-radius:999px;
     padding:6px 14px;background:var(--cream);
+    display:inline-flex;align-items:center;
+  }
+  @media(max-width:760px){
+    .press-grid{grid-template-columns:1fr;}
   }
   @media(max-width:600px){
     .press{padding:36px 0;}
@@ -1131,17 +1148,31 @@ fbq('track', 'PageView');
 <!-- ===== PRESS ===== -->
 <section class="press">
   <div class="wrap">
-    <div class="press-inner">
-      <div class="press-icon"><i class="ti ti-news" aria-hidden="true"></i></div>
-      <div class="press-body">
-        <div class="press-eyebrow">MEDIA COVERAGE</div>
-        <p class="press-quote">沖縄タイムス・琉球新報 両紙に「AI人材育成」事例として掲載されました。</p>
-        <p class="press-desc">沖縄県内の法人向けにAI・デジタルマーケティング人材の育成を支援する取り組みとして、地元紙2紙にCuratorz Academyの事例が紹介されています。</p>
-        <div class="press-logos">
-          <span class="press-logo">沖縄タイムス</span>
-          <span class="press-logo">琉球新報</span>
+    <div class="press-grid">
+      <div class="press-inner">
+        <div class="press-icon"><i class="ti ti-news" aria-hidden="true"></i></div>
+        <div class="press-body">
+          <div class="press-eyebrow">MEDIA COVERAGE</div>
+          <p class="press-quote">沖縄タイムス・琉球新報 両紙に「AI人材育成」事例として掲載されました。</p>
+          <p class="press-desc">沖縄県内の法人向けにAI・デジタルマーケティング人材の育成を支援する取り組みとして、地元紙2紙にCuratorz Academyの事例が紹介されています。</p>
+          <div class="press-logos">
+            <span class="press-logo">沖縄タイムス</span>
+            <span class="press-logo">琉球新報</span>
+          </div>
         </div>
       </div>
+
+      <a href="https://prtimes.jp/main/html/rd/p/000000015.000064304.html" target="_blank" rel="noopener" class="press-inner press-inner-link">
+        <div class="press-icon"><i class="ti ti-speakerphone" aria-hidden="true"></i></div>
+        <div class="press-body">
+          <div class="press-eyebrow">PRESS RELEASE</div>
+          <p class="press-quote">PR TIMESにてサービスローンチを発表しました。</p>
+          <p class="press-desc">「社員全員をAI人材に変える」Curatorz Academyのローンチに関するプレスリリースを、PR TIMESにて公開しています。</p>
+          <div class="press-logos">
+            <span class="press-logo">PR TIMES <i class="ti ti-external-link" style="font-size:12px;margin-left:4px;" aria-hidden="true"></i></span>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </section>
