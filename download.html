@@ -203,17 +203,18 @@ header{
     <div class="doc-contents">
       <div class="dc-title">CONTENTS</div>
       <ul>
+        <li>会社概要 — HENZAとオープンイノベーション実績</li>
         <li>デジタルマーケ・AI人材へ投資すべき3つの理由</li>
         <li>人材育成の課題とCuratorz Academyでの解決法</li>
         <li>サービスの位置づけ(カバー領域と更新性)</li>
-        <li>5つの特徴(約1,000講座・学習機能・カリキュラム・動画・管理)</li>
-        <li>ご提供価格(料金プランと特別価格のご案内)</li>
-        <li>HENZAのAI支援事例(沖縄市・メガネ1番 様 ほか)</li>
+        <li>5つの特徴(約1,000講座・学習機能・カリキュラム・動画アニメ・管理)</li>
+        <li>ご利用料金(4プランと特別価格のご案内)</li>
+        <li>AI活用支援事例(沖縄市・メガネ1番 様)・他社比較</li>
       </ul>
     </div>
 
     <div class="doc-meta">
-      <div class="doc-meta-item">📄 PDF <span>18ページ</span></div>
+      <div class="doc-meta-item">📄 PDF <span>17ページ</span></div>
       <div class="doc-meta-item">🏢 対象 <span>経営層・人事・育成担当</span></div>
       <div class="doc-meta-item">💰 価格 <span>無料</span></div>
     </div>
@@ -289,7 +290,7 @@ header{
         下のボタンから資料をダウンロードしてください。<br>
         またメールにもダウンロードリンクをお送りします。
       </p>
-      <a href="Curatorz_Academy_vol6_big.pdf" download class="dl-btn">
+      <a href="Curatorz_Academy_vol5.pdf" download class="dl-btn">
         📥 資料をダウンロードする（PDF）
       </a>
       <a href="index.html" class="ty-back">← LPトップに戻る</a>
@@ -332,10 +333,32 @@ function handleSubmit(){
   const btn = document.getElementById('submitBtn');
   btn.disabled = true;
   btn.textContent = '送信中...';
-  setTimeout(() => {
+
+  // ▼ GAS WebhookのURLをここに貼り付けてください(demo.htmlと同じURL)
+  const GAS_URL = 'YOUR_GAS_WEBHOOK_URL';
+
+  const payload = {
+    type:      'download',
+    lastName:  document.getElementById('lastName').value,
+    firstName: document.getElementById('firstName').value,
+    email:     document.getElementById('email').value,
+    company:   document.getElementById('company').value,
+    position:  document.getElementById('position').value,
+    employees: document.getElementById('employees').value,
+  };
+
+  fetch(GAS_URL, {
+    method: 'POST',
+    body: JSON.stringify(payload),
+  })
+  .then(() => {
     document.getElementById('formSection').style.display='none';
     document.getElementById('thankyou').style.display='block';
-  }, 600);
+  })
+  .catch(() => {
+    document.getElementById('formSection').style.display='none';
+    document.getElementById('thankyou').style.display='block';
+  });
 }
 
 document.querySelectorAll('input, select').forEach(el => {
