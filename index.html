@@ -456,6 +456,31 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .step-body .reason p{font-size:0.9rem;color:var(--gray);margin:0;}
   .step-body.single{grid-template-columns:1fr;}
 
+  /* ===== Feature screenshots (reason visuals) ===== */
+  .reason-shots{
+    display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;
+  }
+  .reason-shots img{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 4px 14px rgba(26,43,61,0.08);
+    width:100%;height:auto;
+  }
+  .reason-shots.two img{flex:1 1 calc(50% - 7px);min-width:180px;}
+  .reason-shots.one img{flex:1 1 100%;}
+  .thumb-grid{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:14px;
+  }
+  .thumb-grid img{
+    border-radius:6px;border:1px solid var(--line);
+    box-shadow:0 2px 8px rgba(26,43,61,0.08);
+    width:100%;height:auto;display:block;
+  }
+  .thumb-grid figcaption{display:none;}
+  @media(max-width:760px){
+    .thumb-grid{grid-template-columns:repeat(2,1fr);}
+    .reason-shots.two img{flex:1 1 100%;}
+  }
+
   @media (max-width:760px){
     .step{grid-template-columns:1fr;}
     .step-label{padding:18px 24px;flex-direction:row;align-items:center;gap:12px;}
@@ -468,6 +493,95 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   /* ===== Pricing ===== */
   .pricing{background:#fff;}
+
+  /* ===== Course Catalog Tabs ===== */
+  .catalog{background:var(--cream);}
+  .catalog-wrap{max-width:1080px;margin:0 auto;padding:0 24px;}
+
+  /* タブリスト */
+  .catalog-tabs{
+    display:flex;flex-wrap:wrap;gap:8px;
+    margin-bottom:24px;
+  }
+  .catalog-tab{
+    background:#fff;border:1px solid var(--line);
+    border-radius:4px;padding:8px 16px;
+    font-size:0.82rem;font-weight:700;color:var(--gray);
+    cursor:pointer;transition:all 0.2s;
+    display:flex;align-items:center;gap:6px;
+    white-space:nowrap;
+  }
+  .catalog-tab:hover{border-color:var(--amber);color:var(--navy);}
+  .catalog-tab.active{
+    background:var(--navy);color:#fff;border-color:var(--navy);
+  }
+  .catalog-tab .tab-count{
+    font-size:0.7rem;background:rgba(255,255,255,0.2);
+    padding:1px 6px;border-radius:999px;
+  }
+  .catalog-tab:not(.active) .tab-count{
+    background:var(--cream);color:var(--gray);
+  }
+
+  /* パネル */
+  .catalog-panel{display:none;}
+  .catalog-panel.active{display:block;}
+
+  /* 中カテゴリ */
+  .catalog-midcat{
+    display:flex;flex-direction:column;gap:14px;
+  }
+  .midcat-block{
+    background:#fff;border:1px solid var(--line);border-radius:4px;
+    overflow:hidden;
+  }
+  .midcat-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 18px;
+    background:#fff;
+    cursor:pointer;
+    border-bottom:1px solid var(--line);
+  }
+  .midcat-head:hover{background:var(--cream);}
+  .midcat-name{
+    font-family:'Noto Serif JP',serif;font-weight:700;
+    font-size:0.92rem;color:var(--navy);
+  }
+  .midcat-meta{
+    display:flex;align-items:center;gap:10px;
+    font-size:0.75rem;color:var(--gray);flex:none;
+  }
+  .midcat-meta .mc-count{
+    background:var(--cream);border:1px solid var(--line);
+    padding:2px 10px;border-radius:999px;
+    font-weight:700;color:var(--amber);
+  }
+  .midcat-toggle{
+    font-size:16px;color:var(--amber);transition:transform 0.25s;
+  }
+  .midcat-block.open .midcat-toggle{transform:rotate(45deg);}
+  .midcat-courses{
+    display:none;
+    padding:14px 18px;
+    display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    gap:6px;
+  }
+  .midcat-block:not(.open) .midcat-courses{display:none;}
+  .midcat-block.open .midcat-courses{display:grid;}
+  .course-tag{
+    font-size:0.78rem;color:var(--navy-soft);
+    background:var(--cream);border:1px solid var(--line);
+    border-radius:3px;padding:5px 10px;
+    line-height:1.4;
+  }
+
+  /* モバイル */
+  @media(max-width:600px){
+    .catalog-tab{padding:7px 12px;font-size:0.75rem;}
+    .midcat-head{padding:11px 14px;}
+    .midcat-name{font-size:0.86rem;}
+    .midcat-courses{grid-template-columns:1fr;padding:12px 14px;}
+  }
 
   /* ===== Press mention ===== */
   .press{background:var(--cream);padding:48px 0;}
@@ -574,6 +688,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     font-size:0.95rem;font-weight:700;
   }
   .pricing-highlight span{color:var(--gold);}
+
+  /* ===== Subsidy (助成金) ===== */
+  .subsidy-box{
+    margin-top:20px;
+    display:flex;gap:18px;align-items:flex-start;
+    border:1px solid var(--amber);background:#FBF3EA;
+    border-radius:4px;padding:26px 28px;
+  }
+  .subsidy-icon{
+    flex:none;width:46px;height:46px;border-radius:50%;
+    background:var(--amber);color:#fff;
+    display:flex;align-items:center;justify-content:center;font-size:22px;
+  }
+  .subsidy-title{
+    font-family:'Noto Serif JP',serif;font-weight:700;
+    font-size:1.08rem;margin-bottom:8px;color:var(--navy);
+  }
+  .subsidy-body p{font-size:0.86rem;color:var(--navy-soft);margin:0;line-height:1.8;}
+  .subsidy-note{font-size:0.72rem;color:var(--gray);margin-top:12px;line-height:1.7;}
+  @media(max-width:600px){
+    .subsidy-box{flex-direction:column;padding:20px 20px;gap:12px;}
+  }
   @media(max-width:760px){
     .pricing-grid{grid-template-columns:1fr 1fr;}
     .pricing-badges{gap:8px;}
@@ -1186,10 +1322,23 @@ fbq('track', 'PageView');
           <div class="reason">
             <h3>3STEPの学習支援機能で知識を定着</h3>
             <p>経験値&レベル・スキルチャートで毎日続けやすく、全講座検索やテスト生成で反復学習を効率化。チームランキングや自社動画掲載で、組織の育成が自走します。</p>
+            <div class="reason-shots two">
+              <img src="assets/feature-quiz.jpg" alt="動画後の演習トレーニング画面" loading="lazy">
+              <img src="assets/feature-memo.jpg" alt="後で復習・メモ機能の画面" loading="lazy">
+            </div>
           </div>
           <div class="reason">
             <h3>約10分の動画アニメ講座</h3>
             <p>PC・タブレット・スマホどこからでも視聴可能。1授業10分前後でスキマ時間に学べ、アニメーションによる視聴覚学習で定着しやすい構成です。</p>
+            <div class="reason-shots one">
+              <img src="assets/feature-video-course.jpg" alt="動画アニメーション講座の視聴画面" loading="lazy">
+            </div>
+            <div class="thumb-grid">
+              <img src="assets/feature-video-thumb1.jpg" alt="講座サムネイル例1" loading="lazy">
+              <img src="assets/feature-video-thumb2.jpg" alt="講座サムネイル例2" loading="lazy">
+              <img src="assets/feature-video-thumb3.jpg" alt="講座サムネイル例3" loading="lazy">
+              <img src="assets/feature-video-thumb4.jpg" alt="講座サムネイル例4" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
@@ -1203,16 +1352,654 @@ fbq('track', 'PageView');
           <div class="reason">
             <h3>チーム別カリキュラム提案</h3>
             <p>ヒアリング・分析を経て、業界×職種×ツール×レベルで柔軟にカスタマイズ。部署・チームの要望に応じた最適な学習設計をご提案します。</p>
+            <div class="reason-shots one">
+              <img src="assets/feature-curriculum-edit.jpg" alt="カリキュラム編集画面" loading="lazy">
+            </div>
           </div>
           <div class="reason">
             <h3>管理を効率化する機能群</h3>
             <p>学習進捗・理解度を管理画面やCSVで可視化。週1の自動進捗レポート、テストの自動生成、カリキュラムの簡単な追加・編集も可能です。</p>
+            <div class="reason-shots two">
+              <img src="assets/feature-skill-chart.jpg" alt="メンバーごとのスキル可視化画面" loading="lazy">
+              <img src="assets/feature-progress-report.jpg" alt="週次の自動進捗レポート" loading="lazy">
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ===== COURSE CATALOG ===== -->
+<section class="catalog">
+  <div class="catalog-wrap">
+    <span class="tag">COURSE CATALOG</span>
+    <h2 class="section-title">315コース・1,066授業の講座一覧</h2>
+    <p class="section-lead">デジタルマーケティングからAI・DXまで10の大カテゴリで体系的に学べます。</p>
+
+    <!-- タブ -->
+    <div class="catalog-tabs" role="tablist">
+      <button class="catalog-tab active" onclick="switchTab(0)" role="tab">デジタル用語・仕組み <span class="tab-count">13</span></button>
+      <button class="catalog-tab" onclick="switchTab(1)" role="tab">ビジネスモデル・トレンド <span class="tab-count">15</span></button>
+      <button class="catalog-tab" onclick="switchTab(2)" role="tab">マーケティングプロセス <span class="tab-count">14</span></button>
+      <button class="catalog-tab" onclick="switchTab(3)" role="tab">解析 <span class="tab-count">21</span></button>
+      <button class="catalog-tab" onclick="switchTab(4)" role="tab">リサーチ・調査・テスト <span class="tab-count">7</span></button>
+      <button class="catalog-tab" onclick="switchTab(5)" role="tab">認知・集客 <span class="tab-count">48</span></button>
+      <button class="catalog-tab" onclick="switchTab(6)" role="tab">成約率・LTV最大化 <span class="tab-count">16</span></button>
+      <button class="catalog-tab" onclick="switchTab(7)" role="tab">生成AI <span class="tab-count">46</span></button>
+      <button class="catalog-tab" onclick="switchTab(8)" role="tab">業務推進・DX <span class="tab-count">47</span></button>
+      <button class="catalog-tab" onclick="switchTab(9)" role="tab">ECモール <span class="tab-count">7</span></button>
+    </div>
+
+    <!-- パネル0: デジタル用語・仕組みと概念 -->
+    <div class="catalog-panel active">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Webマーケティング概要</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Webマーケティングとは</span>
+            <span class="course-tag">デジタルマーケティングを体系的に学ぶ理由</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Web・デジタル用語を押さえる</span>
+            <span class="midcat-meta"><span class="mc-count">3コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Webマーケティングにおける基本用語</span>
+            <span class="course-tag">Webサイトやページ関連の基本用語</span>
+            <span class="course-tag">BtoB マーケティングでよく使う用語</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">タグやパラメータ</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">タグとパラメータ</span>
+            <span class="course-tag">タグマネージャー</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Webインフラと開発の基礎</span>
+            <span class="midcat-meta"><span class="mc-count">6コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Webサイトの土台をおさえるための仕組み基礎</span>
+            <span class="course-tag">コンピュータとネットワークの仕組み</span>
+            <span class="course-tag">サーバーとストレージ</span>
+            <span class="course-tag">クラウド基礎</span>
+            <span class="course-tag">プログラミングとは</span>
+            <span class="course-tag">基礎知識として押さえておきたいデータベース</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル1: ビジネスモデルとツール・トレンド -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">ビジネスモデルやツールを押さえる</span>
+            <span class="midcat-meta"><span class="mc-count">11コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">風評被害対策</span>
+            <span class="course-tag">ホームページを作る前に準備しておきたいこと</span>
+            <span class="course-tag">オンライン決済サービス概要</span>
+            <span class="course-tag">ビジネスモデルと市場概況</span>
+            <span class="course-tag">アドテクノロジー基礎</span>
+            <span class="course-tag">顧客理解のためのWeb業界の業種を知る</span>
+            <span class="course-tag">MA、SFA、CRM</span>
+            <span class="course-tag">CMS</span>
+            <span class="course-tag">SaaS概要</span>
+            <span class="course-tag">ECサイトの運営業務</span>
+            <span class="course-tag">D2C基礎</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Webマーケティングで押さえるべき法律</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">O2O・OMO・オムニチャネル概要</span>
+            <span class="course-tag">メタバース</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">その他トレンド</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Web販売を行う時に考慮すべき法律①</span>
+            <span class="course-tag">Web販売を行う時に考慮すべき法律②</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル2: マーケティングプロセスとフレームワーク -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">マーケティングフレームワーク</span>
+            <span class="midcat-meta"><span class="mc-count">6コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">マーケティングをフレームワークを通して理解する</span>
+            <span class="course-tag">消費者の購買行動モデル</span>
+            <span class="course-tag">行動経済学から考えるマーケティング手法</span>
+            <span class="course-tag">マーケティング戦略と概念</span>
+            <span class="course-tag">マーケティングにおける心理的アプローチ</span>
+            <span class="course-tag">販客の優先度を決めるために活用できるフレームワーク</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">マーケティング概念と手法</span>
+            <span class="midcat-meta"><span class="mc-count">6コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">労働生産性とは</span>
+            <span class="course-tag">カスタマージャーニーとペルソナ</span>
+            <span class="course-tag">ユーザー視点から問題解決をするデザインシンキング</span>
+            <span class="course-tag">ロジカルシンキングとKGI・KPI</span>
+            <span class="course-tag">重要指標の分解と優先度のつけ方</span>
+            <span class="course-tag">マーケティングにおける費用対効果と投資対効果</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">BtoBマーケティング</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">BtoBマーケティングとは</span>
+            <span class="course-tag">BtoBマーケティングのプロセスと手法</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル3: 解析 -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">アクセス解析の概念とツール</span>
+            <span class="midcat-meta"><span class="mc-count">7コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Web解析とは</span>
+            <span class="course-tag">データ分析の概念と基礎</span>
+            <span class="course-tag">分析時に考慮したいアトリビューション分析とは</span>
+            <span class="course-tag">数字に慣れ強くなる方法</span>
+            <span class="course-tag">トラッキングとは</span>
+            <span class="course-tag">Looker Studio概要</span>
+            <span class="course-tag">BigQuery概要</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Google Analytics</span>
+            <span class="midcat-meta"><span class="mc-count">6コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">GA4概要</span>
+            <span class="course-tag">GA4初期設定</span>
+            <span class="course-tag">GA4レポートと探索基礎</span>
+            <span class="course-tag">GA4のイベント概要</span>
+            <span class="course-tag">GA4の分析基礎</span>
+            <span class="course-tag">GA4分析実践</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">UA・ヒートマップ・ソーシャル分析</span>
+            <span class="midcat-meta"><span class="mc-count">6コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">GA4で分析精度を高めるための設定と活用例</span>
+            <span class="course-tag">Google Analyticsの概要</span>
+            <span class="course-tag">Google Analyticsのよくある問題と対策</span>
+            <span class="course-tag">Google Analyticsまずやっておきたい分析8</span>
+            <span class="course-tag">ヒートマップ</span>
+            <span class="course-tag">ソーシャル分析</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">リサーチ・統計</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">市場調査・ネットリサーチ</span>
+            <span class="course-tag">統計基礎</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル4: リサーチ・組訪・テスト -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">市場・競合リサーチの概念と手法</span>
+            <span class="midcat-meta"><span class="mc-count">3コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">自社・競合・競合への解像度を高める手法</span>
+            <span class="course-tag">市場調査・ネットリサーチ</span>
+            <span class="course-tag">統計基礎</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">インタビューテクニック</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">グループインタビュー</span>
+            <span class="course-tag">デプスインタビュー</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">テスト・PoC</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">ユーザービリティテスト</span>
+            <span class="course-tag">PoC</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル5: 認知・集客 -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">広告初級</span>
+            <span class="midcat-meta"><span class="mc-count">7コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">集客の種類と特徴理解</span>
+            <span class="course-tag">ディスプレイ広告基礎</span>
+            <span class="course-tag">リスティング広告基礎</span>
+            <span class="course-tag">リターゲティング広告基礎</span>
+            <span class="course-tag">レスポンシブ広告</span>
+            <span class="course-tag">ネイティブ広告</span>
+            <span class="course-tag">Web広告のプランニングで押さえるべきこと</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">広告中級</span>
+            <span class="midcat-meta"><span class="mc-count">8コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">リターゲティング広告基礎</span>
+            <span class="course-tag">リスティング広告基礎</span>
+            <span class="course-tag">Bing検索とMicrosoft広告</span>
+            <span class="course-tag">アフィリエイト広告基礎</span>
+            <span class="course-tag">Googleショッピング広告基礎</span>
+            <span class="course-tag">広告の自動入札活用</span>
+            <span class="course-tag">インフルエンサーマーケティング</span>
+            <span class="course-tag">SNS広告基礎</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">広告実践</span>
+            <span class="midcat-meta"><span class="mc-count">11コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">リスティング広告運用のポイント12</span>
+            <span class="course-tag">リターゲティング広告</span>
+            <span class="course-tag">広告の自動入札実践</span>
+            <span class="course-tag">ディスプレイ広告運用のポイント10</span>
+            <span class="course-tag">Googleリスティング・ディスプレイ広告設定方法</span>
+            <span class="course-tag">Google広告における共通基礎確定と補助設定</span>
+            <span class="course-tag">Yahoo!広告のリスティング・ディスプレイ設定方法</span>
+            <span class="course-tag">Google広告において改善・提案で押さえるべきテクニック</span>
+            <span class="course-tag">Googleリスティング広告の実践運用テクニック</span>
+            <span class="course-tag">Facebook広告・Instagram広告の初期設定と広告作成</span>
+            <span class="course-tag">Meta広告運用でおさえておきたい7つのポイント</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">非広告初級（SEO・SNS・コンテンツ）</span>
+            <span class="midcat-meta"><span class="mc-count">10コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">SEO概要</span>
+            <span class="course-tag">企業のSNS運用でやらない方がいいこと</span>
+            <span class="course-tag">自社をメディア化するオウンドメディアとは</span>
+            <span class="course-tag">コンテンツマーケティング</span>
+            <span class="course-tag">動画マーケティング</span>
+            <span class="course-tag">Googleビジネスプロフィール</span>
+            <span class="course-tag">ソーシャル運用基礎</span>
+            <span class="course-tag">TikTokのメカニズムと概要</span>
+            <span class="course-tag">TikTokのアルゴリズムと投稿タイミング</span>
+            <span class="course-tag">Instagramのアルゴリズムとジャンル認知</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">非広告実践（SEO・SNS・コンテンツ）</span>
+            <span class="midcat-meta"><span class="mc-count">12コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">SEO基礎</span>
+            <span class="course-tag">巨大メディア運営企業に聞くSEOにおける手法</span>
+            <span class="course-tag">アプリマーケティング</span>
+            <span class="course-tag">ホワイトペーパー</span>
+            <span class="course-tag">MEO</span>
+            <span class="course-tag">ソーシャル施策</span>
+            <span class="course-tag">TikTokでやっておきたい施策</span>
+            <span class="course-tag">Instagramで押さえておきたい概念と土台施策</span>
+            <span class="course-tag">認知を拡大するプレスリリース</span>
+            <span class="course-tag">ソーシャル施策基礎</span>
+            <span class="course-tag">ウェビナーのやり方</span>
+            <span class="course-tag">展示会をつかったリード獲得</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル6: 成約率・LTV最大化 -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">UI/UXの最適化</span>
+            <span class="midcat-meta"><span class="mc-count">3コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">ページ要素・デザイン改善</span>
+            <span class="course-tag">UIUX</span>
+            <span class="course-tag">回遊</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">LPO・EFO・バナー最適化</span>
+            <span class="midcat-meta"><span class="mc-count">5コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">LPO</span>
+            <span class="course-tag">EFO(エントリーフォーム最適化)</span>
+            <span class="course-tag">かご落ち対策</span>
+            <span class="course-tag">バナー作成時に考えること</span>
+            <span class="course-tag">ABテスト</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">ライティング最適化</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Webライティング</span>
+            <span class="course-tag">コピーライティング</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">累計継続・リピート施策</span>
+            <span class="midcat-meta"><span class="mc-count">3コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">アップセル・クロスセル</span>
+            <span class="course-tag">カスタマーサクセス</span>
+            <span class="course-tag">メールマーケティングのポイント4</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Webサイトの基盤・機能改善</span>
+            <span class="midcat-meta"><span class="mc-count">3コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Web接客・チャットボット</span>
+            <span class="course-tag">サイトリニューアル時に気を付けるポイント</span>
+            <span class="course-tag">サイトが重い時の対策</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル7: 生成AI -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">基礎概念</span>
+            <span class="midcat-meta"><span class="mc-count">25コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">AIとChatGPT</span>
+            <span class="course-tag">生成AIの基礎知識と仕組み</span>
+            <span class="course-tag">生成AI活用のための概念</span>
+            <span class="course-tag">生成AIを活用する今後の概念とリスク</span>
+            <span class="course-tag">生成AI活用のためのリスクや法律</span>
+            <span class="course-tag">組織におけるAI導入と戦略</span>
+            <span class="course-tag">マーケティングでの生成AI活用</span>
+            <span class="course-tag">セールスでの生成AI活用</span>
+            <span class="course-tag">生成AIツール活用のためにおさえる概念と手法</span>
+            <span class="course-tag">G検定概要・対策</span>
+            <span class="course-tag">Slack・Chatwork・Teams</span>
+            <span class="course-tag">ビジネス基礎力</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">実際活用</span>
+            <span class="midcat-meta"><span class="mc-count">19コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">ChatGPT API概要</span>
+            <span class="course-tag">ChatGPTの実践活用(マーケティング・分析編)</span>
+            <span class="course-tag">ChatGPTの実践活用(コンテンツ・ドキュメント作成編)</span>
+            <span class="course-tag">ChatGPTを活用したビジネス文章トレーニング</span>
+            <span class="course-tag">Microsoft 365 Copilot</span>
+            <span class="course-tag">Gemini in Google Workspace</span>
+            <span class="course-tag">GoogleのAIサービス「NotebookLM」</span>
+            <span class="course-tag">生成AIツールの機能重複の把握と選択方法</span>
+            <span class="course-tag">Dify（AIツール作成）</span>
+            <span class="course-tag">n8n（ワークフロー自動化）</span>
+            <span class="course-tag">スライド作成AIの活用法</span>
+            <span class="course-tag">動画作成AIの可能性と活用法</span>
+            <span class="course-tag">AIを使ってAIが作れるDify</span>
+            <span class="course-tag">UIデザインとコード生成AIの活用</span>
+            <span class="course-tag">Claudeのプロジェクト実践</span>
+            <span class="course-tag">マインドマップ化するMapify</span>
+            <span class="course-tag">ChatGPTのアウトプット精度を高めるコツ</span>
+            <span class="course-tag">生成AIにおけるhallucination</span>
+            <span class="course-tag">生成AI活用におけるセキュリティと法律</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">生成AIとオフィスツール連携</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">生成AIとオフィスツールを掛け合わせた活用の概念と手法</span>
+            <span class="course-tag">生成AIにおける精度を高めるフツ</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル8: 業務推進・DX -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">ビジネス基礎ツールの概要とテクニック</span>
+            <span class="midcat-meta"><span class="mc-count">10コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Webマーケティングでよく使うExcel関数</span>
+            <span class="course-tag">Googleスプレッドシートの基礎と活用法</span>
+            <span class="course-tag">施策速度を高める業務効率化ツール</span>
+            <span class="course-tag">データ整理とショートカット活用による効率化ノウハウ</span>
+            <span class="course-tag">デジタルファイル共有の方法とテクニック</span>
+            <span class="course-tag">GASで実現！グラフ作成と自動更新スキル</span>
+            <span class="course-tag">Canvaの活用ポイント</span>
+            <span class="course-tag">プロジェクトマネジメント</span>
+            <span class="course-tag">クラウドソーシングとは</span>
+            <span class="course-tag">クラウドソーシング活用</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Google Meet・Zoom・Teams</span>
+            <span class="midcat-meta"><span class="mc-count">4コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Web会議ツールの使い方_Google Meet</span>
+            <span class="course-tag">Web会議ツールの使い方_Zoom</span>
+            <span class="course-tag">Web会議ツールの使い方_Teams</span>
+            <span class="course-tag">オンライン会議のよくあるトラブルと対策</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">リスク管理基礎</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">リスク管理_機密情報の脅威と保護対策</span>
+            <span class="course-tag">デジタルファイルを取り扱う際の注意点と対策</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">DXツールの概要を知る</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">DXを促進するためのドキュメント最適化</span>
+            <span class="course-tag">DXを促進するための日程調整ツールとオンラインフォーム</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">コミュニケーション・ビジネス基礎</span>
+            <span class="midcat-meta"><span class="mc-count">9コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">SWIHを活用したコミュニケーション</span>
+            <span class="course-tag">チーム力を高める報連相（ホウレンソウ）</span>
+            <span class="course-tag">タイムマネジメント</span>
+            <span class="course-tag">やるべきことが明確になる！優先順位付けのスキル</span>
+            <span class="course-tag">成果を最大化するためのチームワーク</span>
+            <span class="course-tag">ビジネスメールにおいておさえるべき注意点</span>
+            <span class="course-tag">ビジネスライティング</span>
+            <span class="course-tag">信頼を築く電話対応スキル</span>
+            <span class="course-tag">成果を向上するためのPDCAサイクル</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">セールス基礎力</span>
+            <span class="midcat-meta"><span class="mc-count">5コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">効率的な情報収集のための検索力</span>
+            <span class="course-tag">プロジェクトマネジメント</span>
+            <span class="course-tag">ビジネス基礎を強化するためのファイナンス基礎</span>
+            <span class="course-tag">元リクルートのトップセールスが教える「聞き方と話し方の技法」</span>
+            <span class="course-tag">元リクルートのトップセールスが教える「ヒアリング、提案、クロージングの技法」</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- パネル9: ECモール -->
+    <div class="catalog-panel">
+      <div class="catalog-midcat">
+        <div class="midcat-block open">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">ECモール概要</span>
+            <span class="midcat-meta"><span class="mc-count">1コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">ECモール概要</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Amazon</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Amazonの2つの集客施策(基礎編)</span>
+            <span class="course-tag">AmazonのCVR増加施策8(基礎編)</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">Yahoo!ショッピング</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">Yahoo!ショッピングのCVR増加施策8(基礎編)</span>
+            <span class="course-tag">Yahoo!ショッピングの集客施策6(基礎編)</span>
+          </div>
+        </div>
+        <div class="midcat-block">
+          <div class="midcat-head" onclick="toggleMid(this)">
+            <span class="midcat-name">楽天</span>
+            <span class="midcat-meta"><span class="mc-count">2コース</span><span class="midcat-toggle">+</span></span>
+          </div>
+          <div class="midcat-courses">
+            <span class="course-tag">楽天の集客施策(基礎編)</span>
+            <span class="course-tag">楽天のCVR増加施策5(基礎編)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<script>
+function switchTab(idx){
+  document.querySelectorAll('.catalog-tab').forEach((t,i)=>{
+    t.classList.toggle('active', i===idx);
+  });
+  document.querySelectorAll('.catalog-panel').forEach((p,i)=>{
+    p.classList.toggle('active', i===idx);
+  });
+  // 各パネルの最初のブロックを開いた状態にする
+  const activePanel = document.querySelectorAll('.catalog-panel')[idx];
+  const firstBlock = activePanel.querySelector('.midcat-block');
+  if(firstBlock && !firstBlock.classList.contains('open')){
+    firstBlock.classList.add('open');
+  }
+}
+function toggleMid(head){
+  const block = head.parentElement;
+  block.classList.toggle('open');
+}
+</script>
 
 <!-- ===== PRESS ===== -->
 <section class="press">
@@ -1297,6 +2084,19 @@ fbq('track', 'PageView');
 
     <div class="pricing-highlight">
       36ID以上500IDまでは特別価格 月額<span>250,000円</span>。社員数が多いほどお得になります！
+    </div>
+
+    <div class="subsidy-box">
+      <div class="subsidy-icon"><i class="ti ti-discount-2" aria-hidden="true"></i></div>
+      <div class="subsidy-body">
+        <div class="subsidy-title">助成金を活用すれば、最大60%OFFで導入可能</div>
+        <p>
+          厚生労働省「人材開発支援助成金（人への投資促進コース／定額制訓練）」の対象となる場合、受講料の最大60%（大企業は45%）が助成されます。
+        </p>
+        <p class="subsidy-note">
+          ※助成金の支給可否は、申請内容をもとに国の機関が判断するものであり、当社が支給を保証するものではありません。詳細な要件は無料相談にてご確認ください。
+        </p>
+      </div>
     </div>
   </div>
 </section>
