@@ -463,42 +463,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .step-body .reason p{font-size:0.9rem;color:var(--gray);margin:0;}
   .step-body.single{grid-template-columns:1fr;}
 
-  /* ===== Feature screenshots & chips (site-styled) ===== */
-  .reason-shots{
-    display:flex;gap:14px;margin-top:16px;flex-wrap:wrap;
-  }
-  .reason-shots img{
-    border-radius:6px;border:1px solid var(--line);
-    box-shadow:0 4px 14px rgba(26,43,61,0.08);
-    width:100%;height:auto;display:block;
-  }
-  .reason-shots.two img{flex:1 1 calc(50% - 7px);min-width:160px;}
-  .reason-shots.one img{flex:1 1 100%;}
-  .thumb-grid{
-    display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:12px;
-  }
-  .thumb-grid img{
-    border-radius:6px;border:1px solid var(--line);
-    box-shadow:0 2px 8px rgba(26,43,61,0.08);
-    width:100%;height:auto;display:block;
-  }
-  .chip-row{
-    display:flex;flex-wrap:wrap;gap:8px;margin-top:14px;
-  }
-  .chip{
-    font-size:0.72rem;font-weight:700;letter-spacing:.02em;
-    color:var(--navy);background:#F7F4ED;
-    border:1px solid var(--line);border-radius:999px;
-    padding:6px 14px;white-space:nowrap;
-  }
-  .chip.on{
-    background:var(--navy);color:#fff;border-color:var(--navy);
-  }
-  @media(max-width:760px){
-    .thumb-grid{grid-template-columns:repeat(2,1fr);}
-    .reason-shots.two img{flex:1 1 100%;}
-  }
-
   @media (max-width:760px){
     .step{grid-template-columns:1fr;}
     .step-label{padding:18px 24px;flex-direction:row;align-items:center;gap:12px;}
@@ -1344,31 +1308,10 @@ fbq('track', 'PageView');
           <div class="reason">
             <h3>3STEPの学習支援機能で知識を定着</h3>
             <p>経験値&レベル・スキルチャートで毎日続けやすく、全講座検索やテスト生成で反復学習を効率化。チームランキングや自社動画掲載で、組織の育成が自走します。</p>
-            <div class="reason-shots two">
-              <img src="assets/feature-quiz.jpg" alt="動画後の演習トレーニング画面" loading="lazy">
-              <img src="assets/feature-memo.jpg" alt="後で復習・メモ機能の画面" loading="lazy">
-            </div>
-            <div class="chip-row">
-              <span class="chip on">経験値&レベル</span>
-              <span class="chip">演習トレーニング</span>
-              <span class="chip">全講座検索</span>
-              <span class="chip">後で復習機能</span>
-              <span class="chip">テスト生成</span>
-              <span class="chip">チームランキング</span>
-            </div>
           </div>
           <div class="reason">
             <h3>約10分の動画アニメ講座</h3>
             <p>PC・タブレット・スマホどこからでも視聴可能。1授業10分前後でスキマ時間に学べ、アニメーションによる視聴覚学習で定着しやすい構成です。</p>
-            <div class="reason-shots one">
-              <img src="assets/feature-video-course.jpg" alt="動画アニメーション講座の視聴画面" loading="lazy">
-            </div>
-            <div class="thumb-grid">
-              <img src="assets/feature-video-thumb1.jpg" alt="講座サムネイル例1" loading="lazy">
-              <img src="assets/feature-video-thumb2.jpg" alt="講座サムネイル例2" loading="lazy">
-              <img src="assets/feature-video-thumb3.jpg" alt="講座サムネイル例3" loading="lazy">
-              <img src="assets/feature-video-thumb4.jpg" alt="講座サムネイル例4" loading="lazy">
-            </div>
           </div>
         </div>
       </div>
@@ -1386,17 +1329,6 @@ fbq('track', 'PageView');
           <div class="reason">
             <h3>管理を効率化する機能群</h3>
             <p>学習進捗・理解度を管理画面やCSVで可視化。週1の自動進捗レポート、テストの自動生成、カリキュラムの簡単な追加・編集も可能です。</p>
-            <div class="reason-shots two">
-              <img src="assets/feature-skill-chart.jpg" alt="メンバーごとのスキル可視化画面" loading="lazy">
-              <img src="assets/feature-progress-report.jpg" alt="週次の自動進捗レポート" loading="lazy">
-            </div>
-            <div class="chip-row">
-              <span class="chip on">進捗&理解度管理</span>
-              <span class="chip">スキル可視化</span>
-              <span class="chip">週次自動レポート</span>
-              <span class="chip">テスト自動生成</span>
-              <span class="chip">カリキュラム編集</span>
-            </div>
           </div>
         </div>
       </div>
