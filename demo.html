@@ -1,6 +1,13 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-M42K2DZQ');</script>
+<!-- End Google Tag Manager -->
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>無料デモアカウント申込 | Curatorz Academy</title>
@@ -179,6 +186,10 @@ header{
 </style>
 </head>
 <body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-M42K2DZQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
 
 <header>
   <div class="logo"><img src="logo.png" alt="Curatorz Academy"></div>
@@ -247,6 +258,8 @@ header{
         <label>従業員数 <span class="required">必須</span></label>
         <select id="employees">
           <option value="">選択してください</option>
+          <option value="1-10">10名以下</option>
+          <option value="20-35">20〜35名</option>
           <option value="35-50">35〜50名</option>
           <option value="51-100">51〜100名</option>
           <option value="101-200">101〜200名</option>
@@ -344,7 +357,7 @@ function handleSubmit(){
   btn.textContent = '送信中...';
 
   // ▼ GAS WebhookのURLをここに貼り付けてください
-  const GAS_URL = 'https://script.google.com/macros/s/AKfycbz3n9rZF_k4xWOvV0G7IHMU5fyIGtXb6N6XQGeUfu1uOqsDr1GB5lq2uRdaTI3SQII7/exec';
+  const GAS_URL = 'YOUR_GAS_WEBHOOK_URL';
 
   const payload = {
     type:      'demo',
